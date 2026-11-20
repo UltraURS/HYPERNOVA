@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">HYPERNOVA</string>
+    <string name="module_description">为HyperOS3添加了一些实用功能</string>
+    <string-array name="xposed_scope">
+        <item>com.android.systemui</item>
+        <item>com.android.settings</item>
+        <item>com.miui.home</item>
+        <item>com.miui.securitycenter</item>
+        <item>com.android.calendar</item>
+        <item>com.miui.weather2</item>
+        <item>com.miui.voiceassist</item>
+        <item>com.miui.screenshot</item>
+    </string-array>
+</resources>

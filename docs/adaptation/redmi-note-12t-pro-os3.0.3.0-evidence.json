@@ -1,0 +1,2326 @@
+{
+  "profile": "redmi-note-12t-pro-os3.0.3.0",
+  "analysis_date": "2026-11-17",
+  "status": "STATIC_ONLY",
+  "inputs": [
+    {
+      "file": "apks/超级小爱.apk",
+      "bytes": 161303814,
+      "sha256": "dd75a0d9b1c0803906eafe72126dc44a150f16337e26c8fcf53304f13d74140b",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 9757296
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 3827860
+        },
+        {
+          "name": "classes3.dex",
+          "bytes": 4086688
+        },
+        {
+          "name": "classes4.dex",
+          "bytes": 3710448
+        },
+        {
+          "name": "classes5.dex",
+          "bytes": 4598324
+        },
+        {
+          "name": "classes6.dex",
+          "bytes": 3173620
+        },
+        {
+          "name": "classes7.dex",
+          "bytes": 5253616
+        },
+        {
+          "name": "classes8.dex",
+          "bytes": 3200272
+        },
+        {
+          "name": "classes9.dex",
+          "bytes": 6901536
+        },
+        {
+          "name": "classes10.dex",
+          "bytes": 7643056
+        },
+        {
+          "name": "classes11.dex",
+          "bytes": 7449492
+        },
+        {
+          "name": "classes12.dex",
+          "bytes": 9474996
+        },
+        {
+          "name": "classes13.dex",
+          "bytes": 2647616
+        },
+        {
+          "name": "classes14.dex",
+          "bytes": 8319208
+        },
+        {
+          "name": "classes15.dex",
+          "bytes": 4460696
+        },
+        {
+          "name": "classes16.dex",
+          "bytes": 7910260
+        },
+        {
+          "name": "classes17.dex",
+          "bytes": 1922212
+        },
+        {
+          "name": "classes18.dex",
+          "bytes": 4456528
+        },
+        {
+          "name": "classes19.dex",
+          "bytes": 4329972
+        },
+        {
+          "name": "classes20.dex",
+          "bytes": 5286328
+        }
+      ],
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "has_manifest": true,
+      "id": "xiaoai"
+    },
+    {
+      "file": "apks/framework-res.apk",
+      "bytes": 25754906,
+      "sha256": "c80ba7d71ac7e781264bbb521488e8ac4000631097f630bb6e437615d48ca822",
+      "dex": [],
+      "native_abis": [],
+      "has_manifest": true,
+      "id": "framework-res"
+    },
+    {
+      "file": "apks/framework.jar",
+      "bytes": 44919728,
+      "sha256": "a5fd2e94c495c93feb27aa5d9d6ca7d97ba00884be97edcecbcdca80208639cd",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 9426324
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 9282012
+        },
+        {
+          "name": "classes3.dex",
+          "bytes": 9426108
+        },
+        {
+          "name": "classes4.dex",
+          "bytes": 9889624
+        },
+        {
+          "name": "classes5.dex",
+          "bytes": 6826704
+        }
+      ],
+      "native_abis": [],
+      "has_manifest": false,
+      "id": "framework"
+    },
+    {
+      "file": "apks/services.jar",
+      "bytes": 32491458,
+      "sha256": "9372eec4179a4a58e95345fb533307154d67376e4d4bf8896a750f00fc2c5a5c",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 11506896
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 11790340
+        },
+        {
+          "name": "classes3.dex",
+          "bytes": 9087936
+        }
+      ],
+      "native_abis": [],
+      "has_manifest": false,
+      "id": "services"
+    },
+    {
+      "file": "apks/系统界面_20240808.0.apk",
+      "bytes": 48685807,
+      "sha256": "e93e374b93ce676ffa4eaef841517134832f7fe9b79c4711a796549d9ed41ec1",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 10737596
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 6875436
+        },
+        {
+          "name": "classes3.dex",
+          "bytes": 10998100
+        },
+        {
+          "name": "classes4.dex",
+          "bytes": 1174960
+        }
+      ],
+      "native_abis": [],
+      "has_manifest": true,
+      "id": "systemui"
+    },
+    {
+      "file": "apks/系统界面组件_16.5.3.42.0.apk",
+      "bytes": 28959618,
+      "sha256": "81f35e4964cd5679b915f23e898020833f5513a7b30ec0d3f11d0f7808f11639",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 7602296
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 4254844
+        },
+        {
+          "name": "classes3.dex",
+          "bytes": 3805388
+        },
+        {
+          "name": "classes4.dex",
+          "bytes": 2859848
+        },
+        {
+          "name": "classes5.dex",
+          "bytes": 1446876
+        }
+      ],
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "has_manifest": true,
+      "id": "plugin"
+    },
+    {
+      "file": "apks/设置_15.apk",
+      "bytes": 117279700,
+      "sha256": "43f5e03fed66dab94abd1857afd9b3657c2773ebd08e36a1bfa6f4481e9ca67a",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 8972516
+        },
+        {
+          "name": "classes10.dex",
+          "bytes": 3171764
+        },
+        {
+          "name": "classes11.dex",
+          "bytes": 2154440
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 7924384
+        },
+        {
+          "name": "classes3.dex",
+          "bytes": 9969568
+        },
+        {
+          "name": "classes4.dex",
+          "bytes": 6044388
+        },
+        {
+          "name": "classes5.dex",
+          "bytes": 4905684
+        },
+        {
+          "name": "classes6.dex",
+          "bytes": 2067808
+        },
+        {
+          "name": "classes7.dex",
+          "bytes": 2180436
+        },
+        {
+          "name": "classes8.dex",
+          "bytes": 3189088
+        },
+        {
+          "name": "classes9.dex",
+          "bytes": 2311716
+        }
+      ],
+      "native_abis": [],
+      "has_manifest": true,
+      "id": "settings"
+    },
+    {
+      "id": "home",
+      "file": "apks/系统桌面.apk",
+      "bytes": 24942000,
+      "sha256": "36323641c5af2bc0178fb30dad28b6e8e6a35a3aee98e51a2384e84d3e22981f",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 9161812
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 7661064
+        }
+      ],
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "has_manifest": true,
+      "package": "com.miui.home",
+      "version_name": "RELEASE-6.01.03.1943-01051706",
+      "version_code": 601031943
+    },
+    {
+      "id": "securitycenter",
+      "file": "apks/手机管家.apk",
+      "bytes": 62344773,
+      "sha256": "9b532d84e0206b3e1bc42ee9bdb14840b45e637becbdf84dd4a4f2577c06ddf4",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 8202304
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 8037980
+        },
+        {
+          "name": "classes3.dex",
+          "bytes": 8746004
+        },
+        {
+          "name": "classes4.dex",
+          "bytes": 2488692
+        }
+      ],
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "has_manifest": true,
+      "package": "com.miui.securitycenter",
+      "version_name": "12.1.3-251205.0.1",
+      "version_code": 40001213
+    },
+    {
+      "file": "apks/日历.apk",
+      "bytes": 16696576,
+      "sha256": "bd5f85837e95cb80c54bebc598814ee4166002101a1d26b7193698192fb0de26",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 8468592
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 6715080
+        }
+      ],
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "has_manifest": true,
+      "id": "calendar"
+    },
+    {
+      "file": "apks/天气.apk",
+      "bytes": 62861295,
+      "sha256": "a8af7c8494c4c9ad882ad96adb96c2779ac60b7bbbb7f0d176e566d4c7469ec1",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 8304032
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 3813416
+        }
+      ],
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "has_manifest": true,
+      "id": "weather"
+    }
+  ],
+  "additional_inputs": [
+    {
+      "file": "apks/HyperCeiler_settings_backup_2026-11-16-11_43_43.json",
+      "bytes": 21954,
+      "sha256": "d090995cd61f4e51cf9cf17da09a12d56d5eb95a686a2bef68b503f3bdfe7f19",
+      "key_count": 376
+    }
+  ],
+  "target_declarations": [
+    {
+      "input_id": "xiaoai",
+      "dex": "classes7.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/settings/MiuiVoiceSettingActivity$a;->onCreatePreferences(Landroid/os/Bundle;Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes7.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/settings/MiuiVoiceSettingActivity$a;->onResume()V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes7.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/settings/preference/StyleableTextPreference;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes7.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/settings/preference/ValuePreference;->setShowRightArrow(Z)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/fragment/app/Fragment;->getActivity()Landroidx/fragment/app/FragmentActivity;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceFragmentCompat;->getPreferenceScreen()Landroidx/preference/PreferenceScreen;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceGroup;->findPreference(Ljava/lang/CharSequence;)Landroidx/preference/Preference;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceGroup;->addPreference(Landroidx/preference/Preference;)Z"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->getContext()Landroid/content/Context;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setKey(Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setOrder(I)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setPersistent(Z)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setOnPreferenceClickListener(Landroidx/preference/Preference$OnPreferenceClickListener;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference$OnPreferenceClickListener;->onPreferenceClick(Landroidx/preference/Preference;)Z"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "method",
+      "member": "Lyf0/g0;->J()V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "field",
+      "member": "Lyf0/g0;->r:Lyf0/m0;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "field",
+      "member": "Lyf0/g0;->a:Lcom/xiaomi/voiceassistant/TabHostMainActivity;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "field",
+      "member": "Lyf0/m0;->a:Ljava/util/List;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "method",
+      "member": "Lyf0/m0;->addItem(Lzf0/a;I)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "method",
+      "member": "Lzf0/a;-><init>(ILjava/lang/String;Landroid/view/View$OnClickListener;Lyf0/o;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "method",
+      "member": "Lzf0/a;->getTitle()Ljava/lang/String;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "field",
+      "member": "Lyf0/o;->SKILL:Lyf0/o;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes5.dex",
+      "kind": "field",
+      "member": "Lcom/xiaomi/voiceassistant/TabHostMainActivity;->R:Lyf0/g0;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes5.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/TabHostMainActivity;->t0(Lcom/xiaomi/voiceassistant/TabHostMainActivity;Landroid/view/View;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t$a;-><init>(Landroid/content/Context;I)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t$a;->setTitle(Ljava/lang/CharSequence;)Lmiuix/appcompat/app/t$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t$a;->setView(Landroid/view/View;)Lmiuix/appcompat/app/t$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t$a;->setItems([Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lmiuix/appcompat/app/t$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t$a;->setSingleChoiceItems([Ljava/lang/CharSequence;ILandroid/content/DialogInterface$OnClickListener;)Lmiuix/appcompat/app/t$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t$a;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lmiuix/appcompat/app/t$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t$a;->setNegativeButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lmiuix/appcompat/app/t$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t$a;->setNeutralButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lmiuix/appcompat/app/t$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t$a;->create()Lmiuix/appcompat/app/t;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t;->getButton(I)Landroid/widget/Button;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/app/t;->getListView()Landroid/widget/ListView;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes14.dex",
+      "kind": "method",
+      "member": "Lmiuix/androidbasewidget/widget/EditText;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/widget/TextView;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lmiuix/slidingwidget/widget/SlidingButton;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes9.dex",
+      "kind": "method",
+      "member": "Lmiuix/appcompat/widget/Button;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/activity/ComponentActivity;->getActivityResultRegistry()Landroidx/activity/result/ActivityResultRegistry;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/activity/result/ActivityResultRegistry;->register(Ljava/lang/String;Landroidx/activity/result/contract/ActivityResultContract;Landroidx/activity/result/ActivityResultCallback;)Landroidx/activity/result/ActivityResultLauncher;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/activity/result/ActivityResultCallback;->onActivityResult(Ljava/lang/Object;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/activity/result/contract/ActivityResultContracts$StartActivityForResult;-><init>()V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/activity/result/ActivityResultLauncher;->launch(Ljava/lang/Object;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/activity/result/ActivityResultLauncher;->unregister()V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/activity/result/ActivityResult;->getResultCode()I"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/activity/result/ActivityResult;->getData()Landroid/content/Intent;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lh30/f0;->e(Lh30/f0$c;)Landroid/content/Intent;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes5.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/SpeechQueryService;->onStartCommand(Landroid/content/Intent;II)I"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lh30/f0;->a(Ljava/lang/String;ZLh30/f0$e;ZZ)Lcom/xiaomi/ai/api/common/Event;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes5.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/TabHostMainActivity;->onBackPressed()V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lm10/b1;->r(Landroid/content/Intent;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes16.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/ai/api/Template$Query;->getText()Ljava/lang/String;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes16.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/ai/api/Template$Query;->getTextInfo()Liw/a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes16.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/ai/api/Template$Toast;->getQuery()Liw/a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes18.dex",
+      "kind": "method",
+      "member": "Liw/a;->isPresent()Z"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes18.dex",
+      "kind": "method",
+      "member": "Liw/a;->get()Ljava/lang/Object;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes18.dex",
+      "kind": "method",
+      "member": "Liw/a;->ofNullable(Ljava/lang/Object;)Liw/a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/instruction/card/stream/a;-><init>(ILjava/lang/String;Ljava/lang/String;ZLjava/lang/String;ZLj70/c0;ZZLjava/lang/String;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes16.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/ai/api/common/Message;->getPayload()Ljava/lang/Object;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes16.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/ai/api/Nlp$RequestLargeLanguageModelContent;->setQuery(Ljava/lang/String;)Lcom/xiaomi/ai/api/Nlp$RequestLargeLanguageModelContent;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Ls10/c;->getRequestInfo(Landroid/content/Intent;Ls10/c$a;)Ls10/c;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lt10/x0;->l(Ld30/c;Ld30/f;Ls10/c;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lm10/n;->startNlpRequest(Ld30/c;Ld30/f;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lm10/s0$d;->d:Ld30/c;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lm10/m0;->I0(Lm10/s0$d;)Z"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lm10/m0;->J0(Lm10/s0$d;)Z"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes16.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/ai/api/Nlp$Request;-><init>(Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/mainui/inputmodulev3/e;->i(Lcom/xiaomi/voiceassistant/mainui/inputmodulev3/b;Lgf0/b;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes5.dex",
+      "kind": "field",
+      "member": "Lcom/xiaomi/voiceassistant/ConversationFragment$d;->j:Lcom/xiaomi/voiceassistant/ConversationFragment;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "method",
+      "member": "Lff0/e0;->onSendClick(Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes20.dex",
+      "kind": "field",
+      "member": "Lff0/e0;->d:Lcom/xiaomi/voiceassistant/widget/d;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes8.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/widget/d;->isMultiModalUploadShow()Z"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes8.dex",
+      "kind": "method",
+      "member": "Lcom/xiaomi/voiceassistant/widget/d;->isMultiModalUploadSuccess()Z"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/d0$a;-><init>()V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/d0$a;->followRedirects(Z)Lr21/d0$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/d0$a;->followSslRedirects(Z)Lr21/d0$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/d0$a;->retryOnConnectionFailure(Z)Lr21/d0$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/d0$a;->connectTimeout(JLjava/util/concurrent/TimeUnit;)Lr21/d0$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/d0$a;->readTimeout(JLjava/util/concurrent/TimeUnit;)Lr21/d0$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/d0$a;->callTimeout(JLjava/util/concurrent/TimeUnit;)Lr21/d0$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/d0$a;->build()Lr21/d0;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "field",
+      "member": "Lr21/n;->b:Lr21/n;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "field",
+      "member": "Lr21/b;->b:Lr21/b;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/z;->get(Ljava/lang/String;)Lr21/z;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/g0;->create([BLr21/z;)Lr21/g0;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/f0$a;-><init>()V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/f0$a;->url(Ljava/lang/String;)Lr21/f0$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/f0$a;->header(Ljava/lang/String;Ljava/lang/String;)Lr21/f0$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/f0$a;->post(Lr21/g0;)Lr21/f0$a;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/f0$a;->build()Lr21/f0;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/d0;->newCall(Lr21/f0;)Lr21/e;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/e;->execute()Lr21/h0;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/e;->cancel()V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/h0;->code()I"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/h0;->body()Lr21/i0;"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/h0;->close()V"
+    },
+    {
+      "input_id": "xiaoai",
+      "dex": "classes11.dex",
+      "kind": "method",
+      "member": "Lr21/i0;->byteStream()Ljava/io/InputStream;"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes10.dex",
+      "kind": "method",
+      "member": "Lmiuix/preference/DropDownPreference;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes10.dex",
+      "kind": "method",
+      "member": "Lmiuix/preference/DropDownPreference;->setEntries([Ljava/lang/CharSequence;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes10.dex",
+      "kind": "method",
+      "member": "Lmiuix/preference/DropDownPreference;->setEntryValues([Ljava/lang/CharSequence;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes10.dex",
+      "kind": "method",
+      "member": "Lmiuix/preference/DropDownPreference;->setValue(Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/bluetooth/DeviceProfilesSettings;->onResume()V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/settings/bluetooth/DeviceProfilesSettings;->mCachedDevice:Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;->disconnect()V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;->mDevice:Landroid/bluetooth/BluetoothDevice;"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/bluetooth/BluetoothDeviceDetailsFragment;->onResume()V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/settings/bluetooth/BluetoothDeviceDetailsFragment;->mCachedDevice:Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;->disconnect()V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;->mDevice:Landroid/bluetooth/BluetoothDevice;"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceCategory;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/SwitchPreference;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference$OnPreferenceChangeListener;->onPreferenceChange(Landroidx/preference/Preference;Ljava/lang/Object;)Z"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setKey(Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setOrder(I)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setPersistent(Z)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setOnPreferenceChangeListener(Landroidx/preference/Preference$OnPreferenceChangeListener;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->getContext()Landroid/content/Context;"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceGroup;->findPreference(Ljava/lang/CharSequence;)Landroidx/preference/Preference;"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceFragmentCompat;->getPreferenceScreen()Landroidx/preference/PreferenceScreen;"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/TwoStatePreference;->setChecked(Z)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/fragment/app/Fragment;->getActivity()Landroidx/fragment/app/FragmentActivity;"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Landroid/os/RecoverySystem;->bootCommand(Landroid/content/Context;[Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Landroid/os/RecoverySystem;->rebootWipeUserData(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Landroid/os/RecoverySystem;->rebootWipeUserData(Landroid/content/Context;Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Landroid/os/RecoverySystem;->rebootWipeUserData(Landroid/content/Context;Z)V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Landroid/os/RecoverySystem;->rebootWipeUserData(Landroid/content/Context;ZLjava/lang/String;Z)V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Landroid/os/RecoverySystem;->rebootWipeUserData(Landroid/content/Context;ZLjava/lang/String;ZZ)V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Landroid/os/RecoverySystem;->rebootWipeUserData(Landroid/content/Context;ZLjava/lang/String;ZZZ)V"
+    },
+    {
+      "input_id": "services",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/server/MasterClearReceiver;->onReceive(Landroid/content/Context;Landroid/content/Intent;)V"
+    },
+    {
+      "input_id": "services",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/server/devicepolicy/FactoryResetter;->factoryReset()Z"
+    },
+    {
+      "input_id": "services",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/server/devicepolicy/FactoryResetter;->factoryResetInternalUnchecked()V"
+    },
+    {
+      "input_id": "services",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/server/recoverysystem/RecoverySystemService;->rebootRecoveryWithCommand(Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/qs/tileimpl/QSTileImpl;->handleDestroy()V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/qs/tileimpl/QSTileImpl;->handleRefreshState(Ljava/lang/Object;)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/qs/tileimpl/QSTileImpl;->handleSetListening(Z)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/qs/tileimpl/QSTileImpl;->mContext:Landroid/content/Context;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/qs/tileimpl/QSTileImpl;->mHandler:Lcom/android/systemui/qs/tileimpl/QSTileImpl$H;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/qs/tileimpl/QSTileImpl;->mListeners:Landroid/util/ArraySet;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/qs/tileimpl/QSTileImpl;->mStaleListener:Ljava/lang/Object;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/qs/tileimpl/QSTileImpl;->refreshState()V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/qs/tileimpl/QSTileImpl;->refreshState(Ljava/lang/Object;)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/qs/tiles/MiuiCellularTile;->getTileLabel()Ljava/lang/CharSequence;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/qs/tiles/MiuiCellularTile;->handleUpdateState(Lcom/android/systemui/plugins/qs/QSTile$State;Ljava/lang/Object;)V"
+    },
+    {
+      "input_id": "plugin",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lmiui/systemui/controlcenter/qs/tileview/QSCardItemView;->updateState(Lcom/android/systemui/plugins/qs/QSTile$State;ZZ)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/MiuiFactoryResetReceived;->doMasterClear()V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/MiuiMasterClear;->doFactoryReset()V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/MiuiMasterClear;->formatSdCardAndFactoryReset()V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/MiuiMasterClear;->startFactoryReset()V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/MiuiMasterClear;->wipeFrpBlockDataAndDoMasterClear()V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/MiuiMasterClear;->wipeFrpBlockDataAndDoMasterClear(Landroid/app/Activity;Lcom/android/settings/MiuiMasterClear$WipeCallback;)V"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/device/controller/MiuiFactoryResetController;->getPreferenceKey()Ljava/lang/String;"
+    },
+    {
+      "input_id": "settings",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/settings/device/controller/MiuiFactoryResetController;->isAvailable()Z"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/home/recents/GesturesBackTouchProcessor;->onPointerEvent(Landroid/view/MotionEvent;Lcom/miui/home/recents/GestureStubView;)V"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GesturesBackTouchProcessor;->mDownX:F"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GesturesBackTouchProcessor;->mSwipeStatus:I"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureStubView;->mGestureStubPos:I"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureStubView;->mGestureBackArrowView:Lcom/miui/home/recents/GestureBackArrowView;"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureStubView;->mHandler:Lcom/miui/home/recents/GestureStubView$H;"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureStubView;->mTouchable:Z"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureStubView;->mShouldRedirectMotionEvent:Z"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/home/recents/GestureStubView;->onDetachedFromWindow()V"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/home/recents/GestureStubView;->setBackTouchable(Z)V"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureBackArrowView;->mArrow:Landroid/graphics/Bitmap;"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/home/recents/GestureBackArrowView;->onDraw(Landroid/graphics/Canvas;)V"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/home/recents/GestureBackArrowView;->onConfigurationChanged(Landroid/content/res/Configuration;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/gamebooster/service/DockWindowManagerService;->onStartCommand(Landroid/content/Intent;II)I"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/gamebooster/service/DockWindowManagerService;->b:LA4/n;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/gamebooster/service/DockWindowManagerService;->c:Z"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "LA4/n;->e:Lcom/miui/dock/sidebar/j;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "LA4/n;->f:Lcom/miui/dock/sidebar/j;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "LA4/n;->p:Z"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->L1()V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->e1()V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->A1(Lcom/miui/dock/sidebar/j;Ljava/lang/Runnable;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->Q1(Lcom/miui/dock/sidebar/j;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->X0(Lcom/miui/dock/sidebar/j;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/dock/sidebar/j;->H()Z"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/dock/sidebar/j;->F()Z"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/dock/sidebar/j;->Q()V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/dock/sidebar/j;->z()Landroid/widget/FrameLayout;"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/home/recents/GesturesBackTouchProcessor;->isShowBackArrow(F)Z"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/home/recents/GestureBackArrowView$1;->onAnimationSuccess(Landroid/animation/Animator;)V"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureBackArrowView$1;->this$0:Lcom/miui/home/recents/GestureBackArrowView;"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureBackArrowView;->mArrowFeedBackDone:Z"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/dock/sidebar/j;->U(Z)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/shade/MiuiNotificationPanelViewController;->dismissViewController:Lcom/android/systemui/shade/NotificationDismissViewController;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/shade/MiuiNotificationPanelViewController;->getShowDismissView()Z"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/shade/NotificationDismissViewController;->dismissView:Lcom/miui/systemui/widget/CircleAndTickAnimView;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/shade/NotificationDismissViewController;->onInit()V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/shade/NotificationDismissViewController;->updateOrientation()V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/statusbar/notification/collection/NotifCollection;->dismissAllNotifications(I)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/statusbar/notification/collection/NotifCollection;->dismissNotifications(Ljava/util/List;)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/statusbar/notification/collection/NotifCollection;->getEntry(Ljava/lang/String;)Lcom/android/systemui/statusbar/notification/collection/NotificationEntry;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/statusbar/notification/collection/NotifCollection;->mReadOnlyNotificationSet:Ljava/util/Collection;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/statusbar/notification/collection/NotificationEntry;->isClearable()Z"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/statusbar/notification/collection/NotificationEntry;->mDismissState:Lcom/android/systemui/statusbar/notification/collection/NotificationEntry$DismissState;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/statusbar/notification/collection/notifcollection/DismissedByUserStats;-><init>(ILcom/android/internal/statusbar/NotificationVisibility;)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/statusbar/notification/collection/provider/NotificationVisibilityProviderImpl;->obtain(Lcom/android/systemui/statusbar/notification/collection/NotificationEntry;Z)Lcom/android/internal/statusbar/NotificationVisibility;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/statusbar/notification/stack/NotificationStackScrollLayout;->clearNotifications(IZZ)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/statusbar/notification/stack/NotificationStackScrollLayout;->includeChildInClearAll(Lcom/android/systemui/statusbar/notification/row/ExpandableNotificationRow;I)Z"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/statusbar/notification/stack/NotificationStackScrollLayout;->mController:Lcom/android/systemui/statusbar/notification/stack/NotificationStackScrollLayoutController;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/systemui/statusbar/notification/stack/NotificationStackScrollLayoutController;->hasNotifications(IZ)Z"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/statusbar/notification/stack/NotificationStackScrollLayoutController;->mNotifCollection:Lcom/android/systemui/statusbar/notification/collection/NotifCollection;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/systemui/statusbar/notification/stack/NotificationStackScrollLayoutController;->mVisibilityProvider:Lcom/android/systemui/statusbar/notification/collection/render/NotificationVisibilityProvider;"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/home/common/hapticfeedback/HapticFeedbackCompat;->getInstance()Lcom/miui/home/common/hapticfeedback/HapticFeedbackCompat;"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/home/common/hapticfeedback/HapticFeedbackCompat;->performGestureReadyBack()V"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureBackArrowView;->mArrowHeight:I"
+    },
+    {
+      "input_id": "home",
+      "dex": "classes2.dex",
+      "kind": "field",
+      "member": "Lcom/miui/home/recents/GestureBackArrowView;->mArrowWidth:I"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/dock/sidebar/j;->A()Lcom/miui/gamebooster/windowmanager/newbox/TurboLayout;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/dock/sidebar/j;->u()Lcom/miui/dock/sidebar/b;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/dock/sidebar/j;->w()Lcom/miui/dock/sidebar/RegionSamplingImageView;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->Z1(Landroid/view/View;Landroid/view/WindowManager$LayoutParams;)V"
+    },
+    {
+      "input_id": "calendar",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/calendar/settings/y;->h(Landroid/content/Context;)Z"
+    },
+    {
+      "input_id": "calendar",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/calendar/ad/AdsExtraManager;->f(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "calendar",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/calendar/ad/AdsExtraManager;->g(Landroid/content/Context;JLjava/lang/String;)V"
+    },
+    {
+      "input_id": "calendar",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/calendar/ad/AdsExtraManager;->d(I)Lcom/miui/calendar/card/schema/CustomCardSchema;"
+    },
+    {
+      "input_id": "calendar",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/calendar/cards/AdPresenter;->isRemoveCard()Z"
+    },
+    {
+      "input_id": "calendar",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Lcom/miui/calendar/ad/AdsExtraManager;->e:Lcom/miui/calendar/ad/AdsExtraManager;"
+    },
+    {
+      "input_id": "calendar",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Lcom/miui/calendar/ad/AdsExtraManager;->a:Lretrofit2/Call;"
+    },
+    {
+      "input_id": "calendar",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Lcom/miui/calendar/ad/AdsExtraManager;->b:Lretrofit2/Call;"
+    },
+    {
+      "input_id": "calendar",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lretrofit2/Call;->cancel()V"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lq1/e;->j(Ljava/lang/String;I)V"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lw1/d;->a(Ljava/util/Map;Lretrofit2/Callback;)V"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "LI1/a;->f(Landroid/content/Context;IILjava/lang/String;Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "LH1/b;->b(Ljava/lang/String;Landroid/content/Context;)[Lcom/miui/weather2/structures/AdvertisementData;"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/weather2/structures/InfoCardBean;->getList()Ljava/util/List;"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/weather2/structures/InfoListNodeBean;->getType()Ljava/lang/String;"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/weather2/ad/dailyDetailPageAd/DailyDetailAdView;->onFinishInflate()V"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/weather2/ad/dailyDetailPageAd/DailyDetailAdView;->m(Lcom/miui/weather2/structures/InfoDataBean;Lcom/miui/weather2/structures/DailyForecastAdData;)V"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/weather2/tools/u;->a(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "weather",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/miui/weather2/tools/u;->b(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiTopDecoration;->relayout(Landroid/view/SurfaceControl$Transaction;Landroid/view/SurfaceControl$Transaction;Landroid/window/WindowContainerTransaction;Z)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiTopDecoration;->updateVisibility(ZLandroid/view/SurfaceControl$Transaction;)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiTopDecoration;->releaseViews()V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiTopDecoration;->getResult()Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiTopDecoration$RelayoutResult;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiTopDecoration;->closeHandleMenu(Z)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->onMiuiFreeformResizeStart(Z)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->onMiuiFreeformScaleChanged(F)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration$SurfaceControlViewHostFactory;->create(Landroid/content/Context;Landroid/view/Display;Landroid/view/WindowlessWindowManager;)Landroid/view/SurfaceControlViewHost;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiCaptionButtonClickListener;->handleCloseClicked(Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiWindowDecoration;)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MulWinSwitchDecorViewModel;->isInLockTaskMode()Z"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mContext:Landroid/content/Context;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mDecoration:Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiWindowDecoration;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mRunningTaskInfo:Landroid/app/ActivityManager$RunningTaskInfo;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mWindowingMode:I"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mTaskBounds:Landroid/graphics/Rect;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mCaptionVisible:Z"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mSurfaceControlBuilderSupplier:Ljava/util/function/Supplier;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mSurfaceControlViewHostFactory:Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration$SurfaceControlViewHostFactory;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mWindowDecorViewModel:Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MulWinSwitchDecorViewModel;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mTaskOrganizer:Lcom/android/wm/shell/ShellTaskOrganizer;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration;->mMultiTaskingTaskRepository:Lcom/android/wm/shell/multitasking/taskmanager/MultiTaskingTaskRepository;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiTopDecoration;->mOnCaptionButtonClickListener:Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiCaptionButtonClickListener;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiWindowDecoration;->mDisplay:Landroid/view/Display;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiWindowDecoration;->mTaskSurface:Landroid/view/SurfaceControl;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration$RelayoutResult;->mRootView:Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiDecorationRootView;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiBaseWindowDecoration$RelayoutResult;->mCaptionY:I"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiDotView;->getDotY()F"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MiuiDecorationRootView;->mPaint:Landroid/graphics/Paint;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/miuimultiwinswitch/miuiwindowdecor/MulWinSwitchTaskOperations;->minimizeTask(Landroid/app/ActivityManager$RunningTaskInfo;)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/ShellTaskOrganizer;->getRunningTaskInfo(I)Landroid/app/ActivityManager$RunningTaskInfo;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/taskmanager/MultiTaskingTaskRepository;->getMiuiFreeformTaskInfo(I)Lcom/android/wm/shell/multitasking/taskmanager/MiuiFreeformModeTaskInfo;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/android/wm/shell/multitasking/taskmanager/MiuiFreeformModeTaskInfo;->isNormalState()Z"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes3.dex",
+      "kind": "field",
+      "member": "Lcom/android/wm/shell/multitasking/taskmanager/MiuiFreeformModeTaskInfo;->mDestinationScaleX:F"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Landroid/view/ViewGroup;->onInterceptTouchEvent(Landroid/view/MotionEvent;)Z"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Landroid/view/View;->onTouchEvent(Landroid/view/MotionEvent;)Z"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Landroid/view/WindowlessWindowManager;-><init>(Landroid/content/res/Configuration;Landroid/view/SurfaceControl;Landroid/window/InputTransferToken;)V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Landroid/view/SurfaceControl$Builder;->setContainerLayer()Landroid/view/SurfaceControl$Builder;"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Landroid/view/SurfaceControlViewHost;->setView(Landroid/view/View;Landroid/view/WindowManager$LayoutParams;)V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Landroid/view/SurfaceControlViewHost;->relayout(Landroid/view/WindowManager$LayoutParams;)V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Landroid/view/SurfaceControl$Transaction;->setTrustedOverlay(Landroid/view/SurfaceControl;Z)Landroid/view/SurfaceControl$Transaction;"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Landroid/view/SurfaceControl$Transaction;->remove(Landroid/view/SurfaceControl;)Landroid/view/SurfaceControl$Transaction;"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes4.dex",
+      "kind": "method",
+      "member": "Landroid/view/WindowManager$LayoutParams;->setTrustedOverlay()V"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroid/app/TaskInfo;->getWindowingMode()I"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Landroid/app/TaskInfo;->taskId:I"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Landroid/app/TaskInfo;->displayId:I"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Landroid/app/TaskInfo;->isVisible:Z"
+    },
+    {
+      "input_id": "framework",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Landroid/app/TaskInfo;->configuration:Landroid/content/res/Configuration;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->i1(Lcom/miui/dock/sidebar/j;Z)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->K0(ZLcom/miui/gamebooster/windowmanager/newbox/TurboLayout;Lcom/miui/dock/sidebar/j;Landroid/view/View;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->k1(Lcom/miui/dock/sidebar/j;Z)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "LA4/n;->h1(Lcom/miui/dock/sidebar/j;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/dock/sidebar/j;->o()LA4/n;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes2.dex",
+      "kind": "method",
+      "member": "Lcom/miui/gamebooster/windowmanager/newbox/TurboLayout;->getDockLayout()Lcom/miui/gamebooster/windowmanager/newbox/e;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;->isConnected()Z"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;->isBusy()Z"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;->onProfileStateChanged(Lcom/android/settingslib/bluetooth/LocalBluetoothProfile;I)V"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/settingslib/bluetooth/CachedBluetoothDeviceManager;->findDevice(Landroid/bluetooth/BluetoothDevice;)Lcom/android/settingslib/bluetooth/CachedBluetoothDevice;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/settingslib/bluetooth/LocalBluetoothManager;->getInstance(Landroid/content/Context;)Lcom/android/settingslib/bluetooth/LocalBluetoothManager;"
+    },
+    {
+      "input_id": "systemui",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Lcom/android/settingslib/bluetooth/LocalBluetoothManager;->mCachedDeviceManager:Lcom/android/settingslib/bluetooth/CachedBluetoothDeviceManager;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/miui/powercenter/savemode/PowerSaveFragment;->onCreatePreferences(Landroid/os/Bundle;Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceFragmentCompat;->getListView()Landroidx/recyclerview/widget/RecyclerView;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/recyclerview/widget/RecyclerView;->setItemAnimator(Landroidx/recyclerview/widget/RecyclerView$ItemAnimator;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/miui/powercenter/savemode/PowerSaveFragment;->onResume()V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes3.dex",
+      "kind": "method",
+      "member": "Lcom/miui/powercenter/powersaver/PowerSaverProvider;->call(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/fragment/app/Fragment;->getActivity()Landroidx/fragment/app/FragmentActivity;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceFragmentCompat;->getPreferenceScreen()Landroidx/preference/PreferenceScreen;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceCategory;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/CheckBoxPreference;-><init>(Landroid/content/Context;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/SeekBarPreference;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Landroidx/preference/SeekBarPreference;->b:I"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "field",
+      "member": "Landroidx/preference/SeekBarPreference;->i:Z"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/SeekBarPreference;->i(I)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/SeekBarPreference;->j(I)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/SeekBarPreference;->k(I)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/SeekBarPreference;->n(I)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/SeekBarPreference;->onBindViewHolder(Landroidx/preference/i;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/i;->b(I)Landroid/view/View;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference$c;->onPreferenceChange(Landroidx/preference/Preference;Ljava/lang/Object;)Z"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setOnPreferenceChangeListener(Landroidx/preference/Preference$c;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setVisible(Z)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setKey(Ljava/lang/String;)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setOrder(I)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->setPersistent(Z)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/Preference;->getContext()Landroid/content/Context;"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/TwoStatePreference;->setChecked(Z)V"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceGroup;->addPreference(Landroidx/preference/Preference;)Z"
+    },
+    {
+      "input_id": "securitycenter",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Landroidx/preference/PreferenceGroup;->findPreference(Ljava/lang/CharSequence;)Landroidx/preference/Preference;"
+    }
+  ]
+}

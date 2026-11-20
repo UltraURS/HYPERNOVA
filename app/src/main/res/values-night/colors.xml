@@ -1,0 +1,18 @@
+<resources>
+    <color name="page_background">#000000</color>
+    <color name="card_background">#1A1A1A</color>
+    <color name="text_primary">#F2F2F2</color>
+    <color name="text_secondary">#999999</color>
+    <color name="accent">#5B9BFF</color>
+    <color name="accent_background">#15243D</color>
+    <color name="divider">#292929</color>
+    <color name="switch_off">#444448</color>
+    <color name="touch_feedback">#26FFFFFF</color>
+    <color name="status_active_background">#143326</color>
+    <color name="status_active_foreground">#54CE7A</color>
+    <color name="status_warning_background">#3D2C14</color>
+    <color name="status_warning_foreground">#FFC26B</color>
+    <color name="status_inactive_background">#282B30</color>
+    <color name="status_inactive_foreground">#A8AFBA</color>
+    <bool name="light_system_bars">false</bool>
+</resources>

@@ -1,0 +1,14 @@
+HYPERNOVA
+Copyright (C) 2026 HYPERNOVA contributors.
+SPDX-License-Identifier: GPL-3.0-only
+
+DailyUsage.java, SidebarGesture.java and the DEX parser in tools/verify-targets.py are adapted from Connect Colours.
+The shared-configuration approach and gesture scheduling/temporary icon replacement in SidebarGestureHook.java are derived from Connect Colours.
+The BluetoothConfig, RetryRound, ReconnectMessages, BluetoothReconnectHook and BluetoothSettingsHook implementations and the associated retry/message tests are adapted from Connect Colours, with HyperOS 3 host integration and Android 15 receiver handling.
+Connect Colours Copyright (C) 2026 UltraURS and contributors.
+Original project: ../Connect Colours (local source snapshot, version 0.2.4).
+See LICENSE for GNU General Public License version 3 only.
+The original project's illustrations and icons are not included.
+
+Xposed API is compile-only and is not bundled in the APK.
+JUnit is used only in tests. Dependencies retain their respective licenses.

@@ -1,0 +1,10 @@
+.local/
+/apks/
+.gradle/
+**/build/
+local.properties
+*.jks
+*.keystore
+/dist/
+/docs/手机系统与LSPosed信息.md
+__pycache__/
