@@ -3,7 +3,7 @@
 面向 HyperOS 3 的 LSPosed 模块，提供控制中心截屏菜单、每日流量显示、侧边栏手势和通知管理等功能。
 
 > [!IMPORTANT]
-> 本模块为 **Vibe Coding 项目**。若在使用本模块过程中出现任何不可逆的后果，本人概不负责。
+> 本模块为 **Vibe Coding 项目**。若在使用本模块过程中**出现任何不可逆的后果**，**本人概不负责**。
 
 当前开发版为 **0.2.25-dev**。项目以 GPLv3（`GPL-3.0-only`）发布。 [下载 APK 和校验文件](https://github.com/UltraURS/HYPERNOVA/releases) · [许可证](LICENSE) · [版权与移植说明](NOTICE)
 
