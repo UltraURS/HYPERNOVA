@@ -13,13 +13,18 @@ public enum Feature {
     CALENDAR_ADS("calendar_block_ads", "屏蔽日历广告", "阻止日历的专用广告请求，并屏蔽推广及缓存广告卡片；保留日程、节日和普通日历请求。", "com.android.calendar"),
     WEATHER_ADS("weather_block_ads", "屏蔽天气广告", "阻止天气的专用广告请求，隐藏预报广告并过滤缓存及共用内容中的广告卡片；保留天气预报、空气质量和普通内容。", "com.miui.weather2"),
     HEALTH_FORCE_UPDATE("health_hide_force_update", "屏蔽强制更新弹窗", "跳过小米运动健康中只有“下载并更新”按钮的 App 更新提示。仍可在应用内手动检查更新。", "com.mi.health"),
+    STK_WELCOME("stk_hide_welcome", "屏蔽运营商欢迎弹窗", "过滤 USIM 卡应用在开机时显示的运营商欢迎提示，例如“尊敬的用户，感谢您使用中国移动”。", "com.android.stk"),
     SIDEBAR_SWIPE_CLOSE("sidebar_swipe_close", "侧边栏向外滑动收回", "在侧边栏应用列表上向所在屏幕边缘滑动，松手复用系统动画收回；左侧向左、右侧向右，保留纵向滚动与长按拖动。", "com.miui.securitycenter"),
     FREEFORM_CLOSE("freeform_close_button", "小窗右上角关闭按钮", "在普通小窗右上角显示 ×，点击沿用系统原生关闭：退出当前小窗并将任务转到后台。", "com.android.systemui"),
     BLUETOOTH_RECONNECT("bluetooth_reconnect", "蓝牙自动重连", "在系统蓝牙的已配对设备详情页增加自动连接和 1～5 次尝试设置，每台默认关闭。需同时勾选设置与系统界面作用域；手动断开后暂停，重新开蓝牙或重启恢复。", "com.android.settings", "com.android.systemui"),
     BLUETOOTH_PROMPTS("bluetooth_reconnect_prompts", "蓝牙重连提示", "尝试重连、成功或次数耗尽时显示短暂文字提示。需先开启蓝牙自动重连；仅关闭提示不会停止重连。", "com.android.systemui"),
     AUTO_POWER_SAVE("auto_power_save_options", "自动省电设置", "在系统省电模式页增加 HYPERNOVA 分类，可设置未接电时低于 20%～80% 自动开启省电。页面内开关默认关闭、阈值默认 20%，保存后立即生效。", "com.miui.securitycenter"),
     XIAOAI_CUSTOM("xiaoai_custom", "自定义模型与人格", "在超级小爱设置中管理 API Key 和模型，在侧栏的“人格”中设置头像、身份、性格与表达风格。仅参考自定义人格需使用自定义模型。", "com.miui.voiceassist"),
-    SCREENSHOT_MENU("screenshot_tile_menu", "控制中心截屏菜单", "长按截屏磁贴可选择截屏、区域截屏或长截屏。区域截屏在系统选区界面保存。需勾选系统界面和截屏作用域。", "com.android.systemui", "com.miui.screenshot");
+    SCREENSHOT_MENU("screenshot_tile_menu", "控制中心截屏菜单", "长按截屏磁贴可选择截屏、区域截屏或长截屏。区域截屏在系统选区界面保存。需勾选系统界面和截屏作用域。", "com.android.systemui", "com.miui.screenshot"),
+    SYSTEM_HELPER_APP_STATS("systemhelper_disable_app_stats", "停用应用统计", "停止 SystemHelper 采集和上报应用使用时长、按应用流量，并拦截该类缓存记录的补传。保留终端登记。", "com.mobiletools.systemhelper"),
+    SYSTEM_HELPER_SIGNAL_STATS("systemhelper_disable_signal_stats", "停用信号定位采样", "停止 SystemHelper 为信号统计发起高精度定位，同时停止这类信号记录的采集、上报和补传。", "com.mobiletools.systemhelper"),
+    REG_SERVICE_APP_STATS("regservice_disable_app_stats", "停用应用统计", "关闭 RegService 的应用清单、使用时长和按应用流量统计任务。保留运营商注册、配置与心跳。", "com.miui.dmregservice"),
+    ANALYTICS_USAGE_STATS("analytics_disable_usage_stats", "停用应用使用时长统计", "停止 Analytics 生成新的应用使用时长事件。已有队列仍由 Analytics 处理。", "com.miui.analytics");
 
     public static final String PACKAGE = "io.github.hypernova";
     public static final String PREFS = "features";

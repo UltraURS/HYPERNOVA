@@ -272,9 +272,25 @@ TARGETS = {
         "Lcom/miui/calendar/ad/AdsExtraManager;->b:Lretrofit2/Call;",
         "Lretrofit2/Call;->cancel()V"
     ],
+    "systemhelper": [
+        "Lcom/mobiletools/systemhelper/control/AppInfoRegisterReceiver;->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+        "Lcom/mobiletools/systemhelper/control/GetSignalInfoReceiver;->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+        "Lcom/mobiletools/systemhelper/control/SignalInfoRegisterReceiver;->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+        "Lcom/mobiletools/systemhelper/control/e;->a(Lorg/json/JSONObject;)Z",
+    ],
+    "regservice": [
+        "Lu0/i;->g()Z",
+    ],
+    "analytics": [
+        "La/b/a/e/g;->h(Z)V",
+    ],
     "health": [
         "Lcom/mi/health/appupgrade/AppUpgradeUtil;->showUpdateDialogIfNeed(Landroidx/fragment/app/FragmentManager;Lcom/mi/health/appupgrade/model/AppUpgradeResult;Z)V",
         "Lcom/mi/health/appupgrade/model/AppUpgradeResult;->getNew_version()I",
+    ],
+    "stk": [
+        "Lcom/android/stk/MiStkStubImpl;->filterDisplayText(Ljava/lang/String;)Z",
+        "Lcom/android/stk/MiStkStubImpl;->launchTextDialog(Landroid/content/Intent;ILcom/android/internal/telephony/cat/TextMessage;)Z",
     ],
     "weather": [
         "Lq1/e;->j(Ljava/lang/String;I)V",
@@ -461,7 +477,9 @@ def main():
         label = item['id']
         if label not in TARGETS:
             continue
-        path = options.apks / Path(item['file']).name
+        path = options.apks / Path(item['file']).relative_to('apks')
+        if not path.is_file():
+            path = options.apks / path.name
         if hashlib.sha256(path.read_bytes()).hexdigest() != item['sha256']:
             raise SystemExit('SHA-256 mismatch: ' + path.name)
         declared = set()

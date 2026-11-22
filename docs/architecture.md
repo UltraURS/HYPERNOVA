@@ -16,7 +16,7 @@
 - 构建工具可先用源项目的 AGP 8.7.3、Gradle 8.9、JDK 21、SDK/Build Tools 35 组合做最小构建验证；通过后锁定版本，补齐 Gradle Wrapper。工具路径来自本机配置，不写死到其他项目目录。
 - 不引入常驻服务、数据库、云端规则、通用插件框架、全局类扫描或多 ROM 分发系统。首版用一个明确的适配描述类；有第二个真实目标时再扩展。
 
-现代 libxposed 的入口、元数据和系统进程作用域协议与传统 API 不同，不能混用注册文件；若更换路线，入口、配置和作用域需一起调整。[libxposed 官方 API 文档](https://libxposed.github.io/api/io/github/libxposed/api/package-summary.html)
+0.2.30-dev 新增现代入口、作用域声明和远程偏好。LSPosed 2.2.1 选择现代入口，使用 API 101 兼容现有功能的 Hook 调用。旧配置过渡包单独按传统模块构建。[libxposed 官方 API 文档](https://libxposed.github.io/api/io/github/libxposed/api/package-summary.html)
 
 ## 2. 源码移植边界
 
@@ -106,11 +106,11 @@ SystemUI、插件和 Settings 的包名已由本机 APK Manifest 确认。实际
 
 首版采用**保存后重启设备生效**，目标进程启动时读取不可变快照。这样不需要跨进程热更新或在每个系统调用中读取文件。界面显示待重启，不声称点击后立即受到保护。
 
-传统 API 路线使用 `xposedsharedprefs` 元数据和按包名构造的 `XSharedPreferences`。必须验证模块写端、宿主读端和开机未解锁阶段的可读性；不能退回普通私有偏好后仍显示保存成功。桥接不可用时禁用有效配置写入并说明原因。[LSPosed 共享偏好文档](https://github.com/LSPosed/LSPosed/wiki/New-XSharedPreferences)
+传统版本使用 `xposedsharedprefs` 和 `XSharedPreferences`。从 0.2.30-dev 起，LSPosed 2.2.1 使用 libxposed 101 入口分发到现有功能 Hook，模块界面与宿主通过同一组远程偏好读写配置。过渡包读取传统共享偏好，在首次建立远程偏好时导入其开关和阈值。作用域申请由 LSPosed 服务发起授权通知。[libxposed 服务接口](https://github.com/libxposed/service)
 
 共享偏好存布尔开关、侧边栏停留毫秒数和配置版本，不存设备标识、流量历史或其他敏感数据。配置不可读时本次进程不安装阻断功能，记录明确错误；不能以关闭系统调用或破坏启动来补偿。此行为意味着防护不具备框架缺失时仍然生效的保证。
 
-首版界面展示自身激活状态、配置和已知支持信息；目标进程的安装与命中以 LSPosed 日志为准，**不把本应用激活当作各进程均已生效**。不为状态看板新增导出 Provider 或常驻通信服务。
+界面显示模块服务连接状态和配置状态。各目标进程的安装与命中以 LSPosed 日志为准。libxposed 服务通过库的 Provider 建立连接，访问需要系统权限。
 
 ## 6. 每日流量流程
 

@@ -3,10 +3,9 @@
 package io.github.hypernova.ui;
 
 import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -16,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Insets;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -25,60 +25,84 @@ import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
+import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import io.github.hypernova.BuildConfig;
+import io.github.hypernova.HypernovaApp;
 import io.github.hypernova.ModuleStatus;
 import io.github.hypernova.R;
 import io.github.hypernova.compat.DeviceProfile;
 import io.github.hypernova.config.Feature;
+import io.github.hypernova.config.LegacyConfigMigration;
+import io.github.hypernova.config.ScopeTargets;
 import io.github.hypernova.feature.sidebar.SidebarGesture;
 import io.github.hypernova.feature.update.OtaClientStatus;
+import java.util.List;
 import java.util.Locale;
+import java.util.StringJoiner;
+import java.util.function.Consumer;
 
 /** Native views with Miuix-style surfaces and package-based preference pages. */
 public final class MainActivity extends Activity {
     private static final String PACKAGE_PAGE = "package_page";
+    private static final String FEATURE_ROW = "feature_row";
     private static final String REPOSITORY_URL = "https://github.com/UltraURS/HYPERNOVA";
+    private static final List<String> NAV_PAGES = List.of("home", "settings", "about");
     private static final String[][] PACKAGES = {
         {"设置", "com.android.settings"}, {"系统界面", "com.android.systemui"},
         {"系统更新", "com.android.updater"}, {"系统桌面", "com.miui.home"},
         {"手机管家", "com.miui.securitycenter"}, {"日历", "com.android.calendar"},
         {"天气", "com.miui.weather2"}, {"超级小爱", "com.miui.voiceassist"}, {"截屏", "com.miui.screenshot"},
-        {"小米运动健康", "com.mi.health"}
+        {"小米运动健康", "com.mi.health"}, {"USIM 卡应用", "com.android.stk"}, {"SystemHelper", "com.mobiletools.systemhelper"},
+        {"RegService", "com.miui.dmregservice"}, {"Analytics", "com.miui.analytics"}
     };
     private SharedPreferences preferences;
+    private HypernovaApp app;
+    private final Runnable connectionChanged = this::refreshConfiguration;
     private LinearLayout body, navigation;
-    private FrameLayout pageHost;
-    private AnimatorSet pageAnimation;
+    private PageHost pageHost;
+    private View swipeControl;
+    private ValueAnimator pageAnimation;
     private String page = "home";
+    private String searchQuery = "";
+    private FeatureSearchMode searchMode = FeatureSearchMode.NAME;
     private int ink, muted, accent, surface;
+    private int topInset, renderedApi;
     private boolean saving, detail;
     private TextView notice, otaStatus;
 
-    @android.annotation.SuppressLint("WorldReadableFiles")
-    @Override @SuppressWarnings("deprecation") protected void onCreate(Bundle state) {
+    @Override protected void onCreate(Bundle state) {
         super.onCreate(state);
-        try {
-            preferences = getSharedPreferences(Feature.PREFS, Context.MODE_WORLD_READABLE);
-            SharedPreferences.Editor editor = preferences.edit().putInt(Feature.SCHEMA, 1);
-            for (Feature feature : Feature.values()) if (!preferences.contains(feature.key)) editor.putBoolean(feature.key, false);
-            editor.putInt(SidebarGesture.HOLD_KEY, SidebarGesture.clampHoldMillis(
-                preferences.getInt(SidebarGesture.HOLD_KEY, SidebarGesture.DEFAULT_HOLD_MILLIS)));
-            if (!editor.commit()) preferences = null;
-        } catch (SecurityException error) { preferences = null; }
-        if (state != null) page = state.getString("page", "home");
+        app = (HypernovaApp) getApplication();
+        preferences = app.preferences();
+        if (preferences == null && ModuleStatus.frameworkApi() > 0) preferences = openLegacyConfiguration();
+        if (BuildConfig.LEGACY_CONFIG_MIGRATION) backUpLegacyConfiguration();
+        if (state != null) {
+            page = state.getString("page", "home");
+            searchQuery = state.getString("search_query", "");
+            searchMode = FeatureSearchMode.values()[state.getInt("search_mode", 0)];
+        }
         String requestedPackage = getIntent().getStringExtra(PACKAGE_PAGE);
         detail = category(requestedPackage) != null;
         if (detail) page = requestedPackage;
@@ -87,19 +111,21 @@ public final class MainActivity extends Activity {
         accent = getColor(R.color.accent); surface = getColor(R.color.card_background);
         getWindow().setDecorFitsSystemWindows(false);
         getWindow().setNavigationBarContrastEnforced(false);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         LinearLayout root = column(); root.setBackgroundColor(getColor(R.color.page_background));
-        pageHost = new FrameLayout(this) {
-            @Override public boolean onInterceptTouchEvent(MotionEvent event) {
-                return pageAnimation != null || super.onInterceptTouchEvent(event);
-            }
-        };
+        pageHost = new PageHost();
         root.addView(pageHost, new LinearLayout.LayoutParams(-1, 0, 1));
         navigation = new LinearLayout(this); navigation.setBackgroundColor(surface); navigation.setBaselineAligned(false);
         if (detail) navigation.setVisibility(View.GONE);
         root.addView(navigation, new LinearLayout.LayoutParams(-1, -2));
         root.setOnApplyWindowInsetsListener((view, insets) -> {
             Insets bars = insets.getInsets(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
-            view.setPadding(bars.left, bars.top, bars.right, detail ? bars.bottom : 0);
+            int keyboard = insets.getInsets(WindowInsets.Type.ime()).bottom;
+            view.setPadding(bars.left, 0, bars.right, Math.max(keyboard, detail ? bars.bottom : 0));
+            topInset = bars.top;
+            if (body != null) body.setPadding(0, topInset, 0, 0);
+            if (pageHost.preview != null) pageHost.preview.view.setPadding(0, topInset, 0, 0);
+            navigation.setVisibility(detail || insets.isVisible(WindowInsets.Type.ime()) ? View.GONE : View.VISIBLE);
             navigation.setPadding(dp(16), dp(8), dp(16), dp(8) + bars.bottom);
             return insets;
         });
@@ -110,7 +136,21 @@ public final class MainActivity extends Activity {
     }
 
     @Override protected void onSaveInstanceState(Bundle state) {
-        state.putString("page", page); super.onSaveInstanceState(state);
+        state.putString("page", page);
+        state.putString("search_query", searchQuery);
+        state.putInt("search_mode", searchMode.ordinal());
+        super.onSaveInstanceState(state);
+    }
+    @Override protected void onStart() {
+        super.onStart();
+        app.addConnectionListener(connectionChanged);
+        refreshConfiguration();
+    }
+    @Override protected void onStop() {
+        app.removeConnectionListener(connectionChanged);
+        if (pageAnimation != null) pageAnimation.cancel();
+        pageHost.resetDrag();
+        super.onStop();
     }
     @Override protected void onResume() {
         super.onResume();
@@ -121,56 +161,140 @@ public final class MainActivity extends Activity {
         super.onDestroy();
     }
     private boolean editable() {
-        return preferences != null && ModuleStatus.frameworkApi() > 0 && DeviceProfile.matchesBuild();
+        return preferences != null && frameworkApi() > 0 && DeviceProfile.matchesBuild();
+    }
+    private int frameworkApi() {
+        return app.frameworkApi() > 0 ? app.frameworkApi() : ModuleStatus.frameworkApi();
+    }
+    private void refreshConfiguration() {
+        SharedPreferences remote = app.preferences();
+        if (remote == null && ModuleStatus.frameworkApi() > 0) return;
+        if (preferences != remote || renderedApi != frameworkApi()) {
+            preferences = remote;
+            showPage(page);
+        }
+    }
+
+    @android.annotation.SuppressLint("WorldReadableFiles")
+    @SuppressWarnings("deprecation")
+    private SharedPreferences openLegacyConfiguration() {
+        try {
+            SharedPreferences legacy = getSharedPreferences(Feature.PREFS, Context.MODE_WORLD_READABLE);
+            if (!BuildConfig.LEGACY_CONFIG_MIGRATION && legacy.getInt(Feature.SCHEMA, 0) != 1
+                && !legacy.edit().putInt(Feature.SCHEMA, 1).commit()) return null;
+            return legacy;
+        } catch (SecurityException error) {
+            return null;
+        }
+    }
+
+    private void backUpLegacyConfiguration() {
+        String result;
+        if (preferences == null || preferences.getInt(Feature.SCHEMA, 0) != 1) {
+            result = "读取旧配置失败。请确认 LSPosed 已激活 HYPERNOVA 后重新打开";
+        } else {
+            try {
+                LegacyConfigMigration.save(this, preferences);
+                result = "已备份原有开关和阈值，可以覆盖安装新版";
+            } catch (java.io.IOException | org.json.JSONException error) {
+                result = "备份旧配置失败";
+            }
+        }
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
     }
     private String[] category(String key) {
         for (String[] item : PACKAGES) if (item[1].equals(key)) return item;
         return null;
     }
     private void showPage(String selected) {
-        String previousPage = page;
         if (pageAnimation != null) pageAnimation.cancel();
+        pageHost.resetDrag();
+        String previousPage = page;
         LinearLayout previousBody = body;
-        String[] target = category(selected);
-        page = target != null || "settings".equals(selected) || "about".equals(selected) ? selected : "home";
-        notice = otaStatus = null; pageHost.removeAllViews(); navigation.removeAllViews();
-        body = column(); pageHost.addView(body, new FrameLayout.LayoutParams(-1, -1));
-        if (!"home".equals(page)) toolbar(target != null ? target[0] : "settings".equals(page) ? "设置" : "关于", target != null);
+        String next = NAV_PAGES.contains(selected) || category(selected) != null ? selected : "home";
+        if ("settings".equals(previousPage) && !previousPage.equals(next) && previousBody != null) dismissSearchKeyboard();
+        notice = otaStatus = null;
+        pageHost.removeAllViews();
+        PageContent content = createPage(next);
+        pageHost.addView(content.view, new FrameLayout.LayoutParams(-1, -1));
+        selectPage(next, content);
+        if (!detail && previousBody != null && !previousPage.equals(page)) pushPage(previousBody, previousPage);
+    }
+
+    private PageContent createPage(String name) {
+        boolean themed = "home".equals(name) || "about".equals(name);
+        LinearLayout view = themed ? new ThemePage(this) : column();
+        if (!themed) view.setBackgroundColor(getColor(R.color.page_background));
+        view.setPadding(0, topInset, 0, 0);
+        String[] target = category(name);
+        if (target != null || "settings".equals(name)) toolbar(view, target != null ? target[0] : "设置", target != null);
         ScrollView scroll = new ScrollView(this); scroll.setFillViewport(true); scroll.setClipToPadding(false);
         LinearLayout content = column(); content.setPadding(dp(16), dp(16), dp(16), dp(28));
-        scroll.addView(content); body.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1));
-        if (target != null) packagePage(content, target);
-        else if ("settings".equals(page)) settings(content);
-        else if ("about".equals(page)) about(content);
-        else home(content);
+        scroll.addView(content); view.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1));
+        View control = null;
+        if (target != null) packagePage(content, scroll, target);
+        else if ("settings".equals(name)) control = settings(content);
+        else if ("about".equals(name)) about(content);
+        else control = home(content);
+        return new PageContent(view, control);
+    }
+
+    private void selectPage(String name, PageContent content) {
+        renderedApi = frameworkApi();
+        page = name;
+        body = content.view;
+        swipeControl = content.swipeControl;
+        body.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+        body.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+        if ("settings".equals(page)) {
+            body.setFocusableInTouchMode(true);
+            body.requestFocus();
+        }
+        navigation.removeAllViews();
         nav("home", "首页", R.drawable.ic_home, "home".equals(page));
-        nav("settings", "设置", R.drawable.ic_settings, target != null || "settings".equals(page));
+        nav("settings", "设置", R.drawable.ic_settings, detail || "settings".equals(page));
         nav("about", "关于", R.drawable.ic_info, "about".equals(page));
-        if (!detail && previousBody != null && !previousPage.equals(page)) pushPage(previousBody, previousPage);
     }
 
     private void pushPage(View previous, String previousPage) {
         if (!ValueAnimator.areAnimatorsEnabled() || pageHost.getWidth() == 0) return;
-        int oldIndex = "home".equals(previousPage) ? 0 : "settings".equals(previousPage) ? 1 : 2;
-        int newIndex = "home".equals(page) ? 0 : "settings".equals(page) ? 1 : 2;
-        int direction = newIndex > oldIndex ? 1 : -1;
-        if (pageHost.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) direction = -direction;
-        float distance = pageHost.getWidth() * direction;
-        previous.setTranslationX(0); previous.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+        int direction = Integer.signum(NAV_PAGES.indexOf(page) - NAV_PAGES.indexOf(previousPage));
+        float gap = pageHost.getWidth() * (pageHost.isRtl() ? -direction : direction);
+        previous.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
         pageHost.addView(previous, 0, new FrameLayout.LayoutParams(-1, -1));
-        AnimatorSet animation = new AnimatorSet();
-        animation.playTogether(ObjectAnimator.ofFloat(previous, View.TRANSLATION_X, 0, -distance),
-            ObjectAnimator.ofFloat(body, View.TRANSLATION_X, distance, 0));
-        animation.setDuration(250); animation.setInterpolator(new DecelerateInterpolator());
+        positionPages(previous, body, 0f, gap);
+        settlePages(previous, body, gap, -gap, previous);
+    }
+
+    private void settlePages(View first, View second, float gap, float end, View departing) {
+        float start = first.getTranslationX();
+        if (!ValueAnimator.areAnimatorsEnabled() || start == end) {
+            positionPages(first, second, end, gap);
+            pageHost.removeView(departing);
+            return;
+        }
+        ValueAnimator animation = ValueAnimator.ofFloat(start, end);
+        animation.addUpdateListener(frame -> positionPages(first, second, (float) frame.getAnimatedValue(), gap));
+        animation.setDuration(Math.round(90 + 160 * Math.abs(end - start) / Math.abs(gap)));
+        animation.setInterpolator(new DecelerateInterpolator(1.4f));
         animation.addListener(new AnimatorListenerAdapter() {
             @Override public void onAnimationEnd(Animator animator) {
-                pageHost.removeView(previous);
+                positionPages(first, second, end, gap);
+                pageHost.removeView(departing);
                 if (pageAnimation == animation) pageAnimation = null;
             }
         });
         pageAnimation = animation; animation.start();
     }
-    private void toolbar(String title, boolean showBack) {
+
+    private static void positionPages(View first, View second, float offset, float gap) {
+        first.setTranslationX(offset);
+        second.setTranslationX(offset + gap);
+    }
+
+    private record PageContent(LinearLayout view, View swipeControl) { }
+
+    private void toolbar(LinearLayout parent, String title, boolean showBack) {
         FrameLayout bar = new FrameLayout(this);
         TextView heading = text(title, 21, ink, true); heading.setGravity(Gravity.CENTER);
         FrameLayout.LayoutParams headingParams = new FrameLayout.LayoutParams(-1, -1);
@@ -182,10 +306,10 @@ public final class MainActivity extends Activity {
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(dp(48), dp(48), Gravity.START | Gravity.CENTER_VERTICAL);
             params.setMarginStart(dp(8)); bar.addView(button, params);
         }
-        body.addView(bar, new LinearLayout.LayoutParams(-1, dp(56)));
+        parent.addView(bar, new LinearLayout.LayoutParams(-1, dp(56)));
     }
-    private void home(LinearLayout content) {
-        int api = ModuleStatus.frameworkApi();
+    private View home(LinearLayout content) {
+        int api = frameworkApi();
         boolean active = api > 0, supported = DeviceProfile.matchesBuild();
         boolean ready = active && preferences != null && supported;
         TextView heading = text("HYPERNOVA", 34, ink, false);
@@ -226,9 +350,20 @@ public final class MainActivity extends Activity {
         deviceRow(info, "配置状态", preferences != null ? "可写入" : "不可用");
         deviceRow(info, "设备型号", Build.MODEL);
         deviceRow(info, "Android 版本", Build.VERSION.RELEASE + " · API " + Build.VERSION.SDK_INT);
-        deviceRow(info, "适配目标", "Redmi Note 12T Pro\nHyperOS 3.0.3.0.VLHCNXM");
         deviceRow(info, "构建匹配", supported ? "与目标一致" : "与目标不同，功能不会加载");
         content.addView(info);
+
+        LinearLayout scope = card();
+        switchRow(scope, "勾选开关同步到作用域", null, ScopeTargets.SYNC_KEY,
+            editable() && app.preferences() != null, enabledSync -> {
+                if (enabledSync) app.requestScopes(ScopeTargets.enabledPackages(
+                    feature -> preferences.getBoolean(feature.key, false)));
+                else app.forgetScopeRequest();
+            });
+        LinearLayout.LayoutParams scopeParams = new LinearLayout.LayoutParams(-1, -2);
+        scopeParams.topMargin = dp(12);
+        content.addView(scope, scopeParams);
+        return scope;
     }
     private LinearLayout metric(String value, String label) {
         LinearLayout card = paddedCard();
@@ -243,12 +378,15 @@ public final class MainActivity extends Activity {
         TextView detail = text(value, 14, muted, false); detail.setGravity(Gravity.END); detail.setPadding(dp(10), 0, 0, 0);
         row.addView(detail, new LinearLayout.LayoutParams(0, -2, 0.65f)); parent.addView(row);
     }
-    private void settings(LinearLayout content) {
-        TextView status = text(ModuleStatus.frameworkApi() > 0
+    private View settings(LinearLayout content) {
+        LinearLayout categories = column();
+        LinearLayout results = card();
+        EditText query = settingsSearch(content, categories, results);
+        TextView status = text(frameworkApi() > 0
             ? "模块自身已激活 · 更改后重启生效" : "模块尚未激活 · 请在 LSPosed 中启用", 13, accent, false);
         status.setPadding(dp(16), dp(13), dp(16), dp(13)); status.setBackground(round(getColor(R.color.accent_background), 18));
-        content.addView(status);
-        section(content, "应用");
+        categories.addView(status);
+        section(categories, "应用");
         LinearLayout apps = card();
         for (int i = 0; i < PACKAGES.length; i++) {
             if (i > 0) divider(apps);
@@ -258,18 +396,161 @@ public final class MainActivity extends Activity {
             row.setOnClickListener(view -> startActivity(new Intent(this, MainActivity.class).putExtra(PACKAGE_PAGE, target[1])));
             apps.addView(row);
         }
-        content.addView(apps);
+        categories.addView(apps);
         TextView tip = text("选择应用管理功能。涉及多个应用的选项会在各分类中同步显示。", 13, muted, false);
-        tip.setPadding(dp(12), dp(16), dp(12), 0); content.addView(tip);
+        tip.setPadding(dp(12), dp(16), dp(12), 0); categories.addView(tip);
+        content.addView(categories);
+        content.addView(results);
+        return query;
     }
-    private void packagePage(LinearLayout content, String[] target) {
+
+    private EditText settingsSearch(LinearLayout content, LinearLayout categories, LinearLayout results) {
+        LinearLayout searchCard = card();
+        LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(-1, -2);
+        cardParams.bottomMargin = dp(12);
+        content.addView(searchCard, cardParams);
+
+        LinearLayout field = new LinearLayout(this);
+        field.setGravity(Gravity.CENTER_VERTICAL);
+        field.setPaddingRelative(dp(16), 0, dp(4), 0);
+        ImageView magnifier = icon(R.drawable.ic_search, muted);
+        magnifier.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        field.addView(magnifier, new LinearLayout.LayoutParams(dp(20), dp(20)));
+        EditText query = new EditText(this);
+        query.setHint("搜索开关");
+        query.setTextColor(ink);
+        query.setHintTextColor(muted);
+        query.setTextSize(16);
+        query.setSingleLine();
+        query.setImeOptions(EditorInfo.IME_ACTION_SEARCH | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+        query.setBackground(null);
+        query.setMinHeight(dp(52));
+        query.setPaddingRelative(dp(12), 0, dp(8), 0);
+        query.setText(searchQuery);
+        query.setSelection(query.length());
+        field.addView(query, new LinearLayout.LayoutParams(0, -2, 1));
+        ImageView clear = icon(R.drawable.ic_search_clear, muted);
+        clear.setPadding(dp(14), dp(14), dp(14), dp(14));
+        clear.setContentDescription("清除搜索");
+        clear.setBackground(ripple(surface));
+        clear.setOnClickListener(view -> query.setText(""));
+        field.addView(clear, new LinearLayout.LayoutParams(dp(48), dp(48)));
+        searchCard.addView(field);
+
+        RadioGroup modes = new RadioGroup(this);
+        modes.setOrientation(RadioGroup.HORIZONTAL);
+        modes.setPaddingRelative(dp(12), 0, dp(12), dp(5));
+        for (FeatureSearchMode mode : FeatureSearchMode.values()) {
+            RadioButton option = new RadioButton(this);
+            option.setId(View.generateViewId());
+            option.setTag(mode);
+            option.setText(mode.label);
+            option.setTextSize(13);
+            option.setTextColor(ink);
+            option.setMinHeight(dp(48));
+            option.setButtonTintList(new ColorStateList(
+                new int[][]{new int[]{android.R.attr.state_checked}, new int[]{}}, new int[]{accent, muted}));
+            modes.addView(option, new RadioGroup.LayoutParams(0, -2, 1));
+            if (mode == searchMode) modes.check(option.getId());
+        }
+        searchCard.addView(modes);
+
+        Runnable refresh = () -> {
+            boolean searching = !searchQuery.isBlank();
+            clear.setVisibility(searchQuery.isEmpty() ? View.GONE : View.VISIBLE);
+            categories.setVisibility(searching ? View.GONE : View.VISIBLE);
+            results.setVisibility(searching ? View.VISIBLE : View.GONE);
+            if (searching) showSearchResults(results);
+        };
+        query.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence text, int start, int count, int after) { }
+            @Override public void onTextChanged(CharSequence text, int start, int before, int count) {
+                searchQuery = text.toString();
+                refresh.run();
+            }
+            @Override public void afterTextChanged(Editable text) { }
+        });
+        modes.setOnCheckedChangeListener((group, id) -> {
+            searchMode = (FeatureSearchMode) group.findViewById(id).getTag();
+            refresh.run();
+        });
+        query.setOnEditorActionListener((view, action, event) -> {
+            if (action != EditorInfo.IME_ACTION_SEARCH) return false;
+            dismissSearchKeyboard();
+            return true;
+        });
+        refresh.run();
+        return query;
+    }
+
+    private void showSearchResults(LinearLayout results) {
+        results.removeAllViews();
+        for (Feature feature : Feature.values()) {
+            if (!searchMode.matches(feature, searchQuery)) continue;
+            StringJoiner apps = new StringJoiner(" · ");
+            String firstPackage = null;
+            for (String[] target : PACKAGES) if (feature.packages.contains(target[1])) {
+                apps.add(target[0]);
+                if (firstPackage == null) firstPackage = target[1];
+            }
+            if (firstPackage == null) continue;
+            if (results.getChildCount() > 0) divider(results);
+            LinearLayout row = new LinearLayout(this);
+            row.setGravity(Gravity.CENTER_VERTICAL);
+            row.setPaddingRelative(dp(18), dp(14), dp(16), dp(14));
+            row.setBackground(ripple(surface));
+            LinearLayout labels = column();
+            labels.addView(text(feature.title, 17, ink, true));
+            TextView categories = text(apps.toString(), 13, accent, false);
+            categories.setPadding(0, dp(3), 0, dp(4));
+            labels.addView(categories);
+            labels.addView(text(feature.description, 13, muted, false));
+            LinearLayout.LayoutParams labelParams = new LinearLayout.LayoutParams(0, -2, 1);
+            labelParams.setMarginEnd(dp(10));
+            row.addView(labels, labelParams);
+            row.addView(icon(R.drawable.ic_chevron, muted), new LinearLayout.LayoutParams(dp(16), dp(24)));
+            String packageName = firstPackage;
+            row.setOnClickListener(view -> {
+                dismissSearchKeyboard();
+                startActivity(new Intent(this, MainActivity.class).putExtra(PACKAGE_PAGE, packageName)
+                    .putExtra(FEATURE_ROW, feature.key));
+            });
+            results.addView(row);
+        }
+        if (results.getChildCount() == 0) {
+            TextView empty = text("没有匹配的开关", 14, muted, false);
+            empty.setPadding(dp(18), dp(16), dp(18), dp(16));
+            results.addView(empty);
+        }
+    }
+
+    private void dismissSearchKeyboard() {
+        body.requestFocus();
+        getWindow().getInsetsController().hide(WindowInsets.Type.ime());
+    }
+
+    private void packagePage(LinearLayout content, ScrollView scroll, String[] target) {
         LinearLayout identity = card(); identity.addView(packageIdentity(target, false)); content.addView(identity);
         notice = text(editable() ? "更改后重启手机生效。" : "请确认 LSPosed 已激活模块、共享配置可用且设备构建匹配。", 13, muted, false);
         notice.setPadding(dp(12), dp(16), dp(12), dp(12)); content.addView(notice);
         LinearLayout options = card(); boolean added = false;
+        String requestedFeature = getIntent().getStringExtra(FEATURE_ROW);
         for (Feature feature : Feature.values()) if (feature.packages.contains(target[1])) {
             if (added) divider(options);
-            featureRow(options, feature); added = true;
+            LinearLayout row = featureRow(options, feature); added = true;
+            if (feature.key.equals(requestedFeature)) {
+                row.setBackground(ripple(getColor(R.color.accent_background)));
+                scroll.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+                    @Override public void onLayoutChange(View view, int l, int t, int r, int b,
+                                                         int oldL, int oldT, int oldR, int oldB) {
+                        scroll.removeOnLayoutChangeListener(this);
+                        Rect bounds = new Rect();
+                        row.getDrawingRect(bounds);
+                        scroll.offsetDescendantRectToMyCoords(row, bounds);
+                        scroll.scrollTo(0, bounds.top - dp(8));
+                    }
+                });
+            }
             if (feature == Feature.SIDEBAR_GESTURE) { divider(options); sidebarTimingRow(options); }
         }
         if (added) content.addView(options);
@@ -285,30 +566,22 @@ public final class MainActivity extends Activity {
         }
     }
     private void about(LinearLayout content) {
-        section(content, "使用方式");
-        LinearLayout usage = paddedCard();
-        infoRow(usage, "管理功能", "在设置页选择对应应用；跨应用功能在相关包名下共用配置。");
-        infoRow(usage, "生效方式", "开关和阈值保存后需重启手机。");
-        infoRow(usage, "基础作用域", "系统界面 · com.android.systemui\n设置 · com.android.settings");
-        infoRow(usage, "蓝牙自动重连", "同样需要设置和系统界面。全局开关重启生效；每台设备的开关与次数在系统蓝牙详情页保存后立即生效。");
-        infoRow(usage, "自动省电", "勾选手机管家作用域，在手机管家分类开启自动省电设置并重启；随后进入系统省电模式页面底部的 HYPERNOVA 分类，开启自动打开并调整阈值。");
-        infoRow(usage, "侧边栏作用域", "系统桌面 · com.miui.home\n手机管家 · com.miui.securitycenter");
-        infoRow(usage, "广告屏蔽作用域", "日历 · com.android.calendar\n天气 · com.miui.weather2");
-        content.addView(usage);
-        section(content, "功能说明");
-        LinearLayout scope = paddedCard();
-        infoRow(scope, "返回手势呼出侧边栏", "从系统返回手势的就绪震动开始计时，默认 0.30 秒后再次震动并切换图标；松手打开，回划取消。无需拉到动画最大位置。");
-        infoRow(scope, "隐藏系统侧边栏触发条", "在手机管家分类开启。仅隐藏并禁用收起状态的原生触发区域，保留侧边栏；不接管普通返回手势。");
-        infoRow(scope, "侧边栏向外滑动收回", "在手机管家分类开启。在应用列表上左侧向左、右侧向右滑动后松手，使用原生收回动画。");
-        infoRow(scope, "小窗右上角关闭按钮", "在系统界面分类开启。点击 × 沿用系统原生小窗关闭，任务转到后台。");
-        infoRow(scope, "蓝牙自动重连", "在设置或系统界面分类开启，重启后到系统蓝牙的已配对设备详情底部设置 HYPERNOVA 选项。每台默认关闭，1～5 次含首次；请求后等待连接 15 秒，连接出现后再稳定确认 5 秒才提示成功。短暂连接不重置次数，失败或稳定连接后断开均等待 10 秒；系统正在连接时延后尝试。手动断开后暂停，重新开蓝牙或重启恢复。蓝牙重连提示可在系统界面分类单独开启。");
-        infoRow(scope, "自动省电", "系统省电模式页可设置未接电且电量严格小于阈值时自动开启普通省电模式。默认关闭，阈值 20%～80%、默认 20%；开关和阈值保存后立即生效。本轮手动关闭后保持关闭，重新插拔电源或电量恢复到阈值再下降时重新触发。充电或关闭自动选项不会替你关闭已开启的省电模式。");
-        infoRow(scope, "通知中心一键清理", "竖屏时按钮位于通知中心底部，横屏时位于右侧中部。保留锁定和系统不可清除的通知，仅置顶的通知仍可清理。");
-        infoRow(scope, "日历与天气广告", "在各自分类分别开启。阻断专用广告加载，屏蔽缓存广告；共用内容接口保留正常内容并过滤广告条目。");
-        infoRow(scope, "恢复出厂设置", "隐藏普通条目、底部推荐及设置搜索结果，不拦截实际重置。");
-        infoRow(scope, "OTA 服务器阻断", "仅限已适配的 OTA 客户端。当前 ROM 没有更新器时，在系统更新分类显示不适用。");
-        content.addView(scope);
-        section(content, "来源");
+        LinearLayout identity = column();
+        identity.setGravity(Gravity.CENTER);
+        identity.setMinimumHeight(dp(338));
+        ImageView logo = new ImageView(this);
+        logo.setImageResource(R.mipmap.ic_hypernova);
+        logo.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        identity.addView(logo, new LinearLayout.LayoutParams(dp(112), dp(112)));
+        TextView name = text(getString(R.string.app_name), 34, ink, true);
+        name.setGravity(Gravity.CENTER);
+        name.setPadding(0, dp(16), 0, dp(8));
+        identity.addView(name);
+        TextView version = text(getString(R.string.module_version), 14, getColor(R.color.nova_text_secondary), false);
+        version.setGravity(Gravity.CENTER);
+        identity.addView(version, new LinearLayout.LayoutParams(-1, -2));
+        content.addView(identity);
+        section(content, "来源").setTextColor(getColor(R.color.nova_text_secondary));
         LinearLayout source = paddedCard();
         infoRow(source, "许可证", "GPL-3.0-only");
         LinearLayout repository = column();
@@ -343,13 +616,19 @@ public final class MainActivity extends Activity {
         if (arrow) row.addView(icon(R.drawable.ic_chevron, muted), new LinearLayout.LayoutParams(dp(16), dp(24)));
         return row;
     }
+    private LinearLayout featureRow(LinearLayout parent, Feature feature) {
+        return switchRow(parent, feature.title, feature.description, feature.key, editable(), enabled -> {
+            if (enabled) app.requestScopes(feature.packages);
+        });
+    }
     @SuppressWarnings("UseSwitchCompatOrMaterialCode")
-    private void featureRow(LinearLayout parent, Feature feature) {
+    private LinearLayout switchRow(LinearLayout parent, String label, String description, String key,
+                                   boolean editEnabled, Consumer<Boolean> onSaved) {
         LinearLayout item = column(); item.setPadding(dp(20), dp(14), dp(20), dp(14)); item.setBackground(ripple(surface));
         LinearLayout row = new LinearLayout(this); row.setGravity(Gravity.CENTER_VERTICAL);
-        TextView title = text(feature.title, 17, ink, true); title.setPadding(0, 0, dp(16), 0);
+        TextView title = text(label, 17, ink, true); title.setPadding(0, 0, dp(16), 0);
         row.addView(title, new LinearLayout.LayoutParams(0, -2, 1));
-        Switch toggle = new Switch(this); toggle.setContentDescription(feature.title); toggle.setShowText(false);
+        Switch toggle = new Switch(this); toggle.setContentDescription(label); toggle.setShowText(false);
         toggle.setMinHeight(dp(48)); toggle.setSwitchMinWidth(dp(52));
         GradientDrawable thumb = round(Color.WHITE, 20); thumb.setSize(dp(24), dp(24));
         toggle.setThumbTintList(null); toggle.setTrackTintList(null); toggle.setThumbDrawable(new InsetDrawable(thumb, dp(3)));
@@ -357,19 +636,24 @@ public final class MainActivity extends Activity {
         GradientDrawable checked = round(accent, 20); checked.setSize(dp(52), dp(30));
         GradientDrawable unchecked = round(getColor(R.color.switch_off), 20); unchecked.setSize(dp(52), dp(30));
         track.addState(new int[]{android.R.attr.state_checked}, checked); track.addState(new int[]{}, unchecked); toggle.setTrackDrawable(track);
-        toggle.setChecked(preferences != null && preferences.getBoolean(feature.key, false)); toggle.setEnabled(editable());
+        toggle.setChecked(preferences != null && preferences.getBoolean(key, false)); toggle.setEnabled(editEnabled);
         if (!toggle.isEnabled()) toggle.setAlpha(0.45f);
         row.addView(toggle); item.addView(row);
-        item.addView(text(feature.description, 13, muted, false)); parent.addView(item);
+        if (description != null) item.addView(text(description, 13, muted, false));
+        parent.addView(item);
         item.setOnClickListener(view -> { if (toggle.isEnabled()) toggle.toggle(); });
         toggle.setOnCheckedChangeListener((button, enabled) -> {
             if (saving || !editable()) return;
-            boolean previous = preferences.getBoolean(feature.key, false);
-            if (preferences.edit().putBoolean(feature.key, enabled).commit()) saved("已保存，请重启手机生效。");
+            boolean previous = preferences.getBoolean(key, false);
+            if (commit(preferences.edit().putBoolean(key, enabled))) {
+                saved("已保存，请重启手机生效。");
+                onSaved.accept(enabled);
+            }
             else {
                 saving = true; toggle.setChecked(previous); saving = false; saveFailed();
             }
         });
+        return item;
     }
     private void sidebarTimingRow(LinearLayout parent) {
         LinearLayout item = column(); item.setPadding(dp(20), dp(18), dp(20), dp(18)); parent.addView(item);
@@ -391,10 +675,14 @@ public final class MainActivity extends Activity {
             }
             private void save() {
                 if (!editable()) return;
-                if (preferences.edit().putInt(SidebarGesture.HOLD_KEY, SidebarGesture.MIN_HOLD_MILLIS + slider.getProgress() * 10).commit()) saved("触发阈值已保存，请重启手机生效。");
+                if (commit(preferences.edit().putInt(SidebarGesture.HOLD_KEY, SidebarGesture.MIN_HOLD_MILLIS + slider.getProgress() * 10))) saved("触发阈值已保存，请重启手机生效。");
                 else saveFailed();
             }
         });
+    }
+    private boolean commit(SharedPreferences.Editor update) {
+        try { return update.commit(); }
+        catch (io.github.libxposed.service.XposedService.ServiceException error) { return false; }
     }
     private void saved(String message) { if (notice != null) notice.setText(message); }
     private void saveFailed() {
@@ -413,13 +701,122 @@ public final class MainActivity extends Activity {
     private ImageView icon(int resource, int color) {
         ImageView image = new ImageView(this); Drawable drawable = getDrawable(resource).mutate(); drawable.setTint(color); image.setImageDrawable(drawable); return image;
     }
+    // The navigation buttons expose the equivalent actions to accessibility services.
+    @SuppressLint("ClickableViewAccessibility")
+    private final class PageHost extends FrameLayout {
+        private final NavigationSwipe swipe = new NavigationSwipe(
+            ViewConfiguration.get(MainActivity.this).getScaledTouchSlop(), dp(64));
+        private final Rect controlBounds = new Rect();
+        private PageContent preview;
+        private String previewName;
+        private float gap;
+
+        PageHost() { super(MainActivity.this); }
+
+        boolean isRtl() { return getLayoutDirection() == View.LAYOUT_DIRECTION_RTL; }
+
+        @Override public boolean onInterceptTouchEvent(MotionEvent event) {
+            if (detail) return false;
+            if (pageAnimation != null) return true;
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN -> {
+                    WindowInsets insets = getRootWindowInsets();
+                    Insets edges = insets == null ? Insets.NONE : insets.getInsets(WindowInsets.Type.systemGestures());
+                    float x = event.getX(), y = event.getY();
+                    boolean eligible = x >= Math.max(dp(24), edges.left) && x <= getWidth() - Math.max(dp(24), edges.right);
+                    if (eligible && swipeControl != null && swipeControl.getLocalVisibleRect(controlBounds)) {
+                        offsetDescendantRectToMyCoords(swipeControl, controlBounds);
+                        eligible = !controlBounds.contains((int) x, (int) y);
+                    }
+                    swipe.start(x, y, eligible);
+                }
+                case MotionEvent.ACTION_MOVE -> { return drag(event); }
+                case MotionEvent.ACTION_POINTER_DOWN, MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> resetDrag();
+            }
+            return false;
+        }
+
+        @Override public boolean onTouchEvent(MotionEvent event) {
+            if (detail) return super.onTouchEvent(event);
+            if (pageAnimation != null) return true;
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_MOVE -> drag(event);
+                case MotionEvent.ACTION_POINTER_DOWN, MotionEvent.ACTION_CANCEL -> {
+                    swipe.cancel();
+                    finishDrag(false);
+                }
+                case MotionEvent.ACTION_UP -> {
+                    drag(event);
+                    finishDrag(swipe.finish(event.getX()));
+                }
+            }
+            return true;
+        }
+
+        private boolean drag(MotionEvent event) {
+            if (!swipe.intercept(event.getX(), event.getY()) || getWidth() == 0) return false;
+            float offset = swipe.offset(event.getX());
+            if (offset == 0f) {
+                if (preview != null) positionPages(body, preview.view, 0f, gap);
+                return true;
+            }
+            int step = offset < 0f ? 1 : -1;
+            int next = NAV_PAGES.indexOf(page) + (isRtl() ? -step : step);
+            if (next < 0 || next >= NAV_PAGES.size()) {
+                removePreview();
+                return true;
+            }
+
+            String target = NAV_PAGES.get(next);
+            gap = step * getWidth();
+            offset = Math.max(-getWidth(), Math.min(getWidth(), offset));
+            if (!target.equals(previewName)) {
+                removePreview();
+                preview = createPage(target);
+                previewName = target;
+                preview.view.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+                preview.view.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+                addView(preview.view, new FrameLayout.LayoutParams(-1, -1));
+            }
+            positionPages(body, preview.view, offset, gap);
+            return true;
+        }
+
+        private void finishDrag(boolean accepted) {
+            if (preview == null) return;
+            LinearLayout previous = body;
+            PageContent adjacent = preview;
+            String target = previewName;
+            preview = null;
+            previewName = null;
+            if (accepted) {
+                if ("settings".equals(page)) dismissSearchKeyboard();
+                previous.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+                selectPage(target, adjacent);
+            }
+            settlePages(previous, adjacent.view, gap, accepted ? -gap : 0f, accepted ? previous : adjacent.view);
+        }
+
+        private void removePreview() {
+            if (preview != null) removeView(preview.view);
+            preview = null;
+            previewName = null;
+            if (body != null) body.setTranslationX(0f);
+        }
+
+        void resetDrag() {
+            swipe.cancel();
+            removePreview();
+        }
+    }
     private TextView infoRow(LinearLayout parent, String label, String value) {
         TextView heading = text(label, 13, muted, false); heading.setPadding(0, dp(8), 0, dp(5)); parent.addView(heading);
         TextView detail = text(value, 15, ink, false); detail.setPadding(0, 0, 0, dp(12)); parent.addView(detail);
         return detail;
     }
-    private void section(LinearLayout parent, String label) {
+    private TextView section(LinearLayout parent, String label) {
         TextView heading = text(label, 13, muted, false); heading.setPadding(dp(12), dp(22), 0, dp(10)); parent.addView(heading);
+        return heading;
     }
     private void divider(LinearLayout parent) {
         View line = new View(this); line.setBackgroundColor(getColor(R.color.divider));

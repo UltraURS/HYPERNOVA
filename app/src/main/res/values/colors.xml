@@ -1,5 +1,13 @@
 <resources>
     <color name="hypernova_icon_background">#04082A</color>
+    <color name="nova_sky_top">#F4F9FF</color>
+    <color name="nova_sky_bottom">#E1EDFA</color>
+    <color name="nova_glow_blue">#541A74EF</color>
+    <color name="nova_glow_cyan">#4F1EDFE9</color>
+    <color name="nova_starlight">#D9F8FCFF</color>
+    <color name="nova_orbit_blue">#74197BF2</color>
+    <color name="nova_orbit_cyan">#6800BACD</color>
+    <color name="nova_text_secondary">#4D627B</color>
     <color name="page_background">#F7F7F7</color>
     <color name="card_background">#FFFFFF</color>
     <color name="text_primary">#181818</color>

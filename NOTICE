@@ -11,4 +11,7 @@ See LICENSE for GNU General Public License version 3 only.
 The original project's illustrations and icons are not included.
 
 Xposed API is compile-only and is not bundled in the APK.
+libxposed Service and its IPC interface are redistributed under the Apache License 2.0.
+Upstream: https://github.com/libxposed/service
+See app/src/main/resources/META-INF/LICENSE-libxposed.txt.
 JUnit is used only in tests. Dependencies retain their respective licenses.

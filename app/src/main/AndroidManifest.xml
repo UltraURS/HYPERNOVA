@@ -8,10 +8,15 @@
         <package android:name="com.android.calendar" />
         <package android:name="com.miui.weather2" />
         <package android:name="com.mi.health" />
+        <package android:name="com.android.stk" />
         <package android:name="com.miui.voiceassist" />
         <package android:name="com.miui.screenshot" />
+        <package android:name="com.mobiletools.systemhelper" />
+        <package android:name="com.miui.dmregservice" />
+        <package android:name="com.miui.analytics" />
     </queries>
-    <application android:allowBackup="false" android:dataExtractionRules="@xml/data_extraction_rules" android:label="@string/app_name"
+    <application android:name=".HypernovaApp" android:allowBackup="false" android:dataExtractionRules="@xml/data_extraction_rules"
+        android:label="@string/app_name" android:description="@string/module_description"
         android:icon="@mipmap/ic_hypernova" android:supportsRtl="true"
         android:theme="@style/Theme.Hypernova">
         <activity android:name=".ui.MainActivity" android:exported="true" android:enableOnBackInvokedCallback="true">
@@ -20,6 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider android:name="io.github.libxposed.service.XposedProvider"
+            android:permission="android.permission.MANAGE_USERS" android:directBootAware="true" />
         <meta-data android:name="xposedmodule" android:value="true" />
         <meta-data android:name="xposeddescription" android:value="@string/module_description" />
         <meta-data android:name="xposedminversion" android:value="82" />

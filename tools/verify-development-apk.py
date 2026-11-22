@@ -2,6 +2,7 @@
 """Check development APK packaging, including the separately loaded notification bridge."""
 import argparse
 import importlib.util
+import xml.etree.ElementTree as ET
 import zipfile
 from pathlib import Path
 
@@ -10,6 +11,7 @@ def main():
     root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser()
     parser.add_argument('apk', type=Path, nargs='?', default=root / 'app/build/outputs/apk/debug/app-debug.apk')
+    parser.add_argument('--legacy-migration', action='store_true')
     args = parser.parse_args()
     spec = importlib.util.spec_from_file_location('dex_reader', root / 'tools/verify-targets.py')
     reader = importlib.util.module_from_spec(spec)
@@ -28,12 +30,15 @@ def main():
             if name.endswith('.dex') and not name.startswith('assets/'):
                 _, _, classes = reader.dex_members(archive.read(name))
                 declared.update(classes)
-        for required in ('hook/ModuleEntry', 'feature/notification/NotificationControlsHook', 'feature/notification/NotificationClearAllHook', 'feature/update/SettingsSearchHook',
+        for required in ('hook/ModuleEntry', 'hook/ModernModuleEntry', 'HypernovaApp', 'config/LegacyConfigMigration',
+                         'config/ScopeTargets', 'ui/ThemePage', 'ui/NavigationSwipe',
+                         'feature/notification/NotificationControlsHook', 'feature/notification/NotificationClearAllHook', 'feature/update/SettingsSearchHook',
                          'feature/sidebar/SidebarGesture', 'feature/sidebar/SidebarGestureHook', 'feature/sidebar/SidebarPanelHook',
                          'feature/sidebar/SidebarTriggerHook', 'feature/sidebar/SidebarSwipeHook', 'feature/freeform/FreeformCloseHook',
                          'feature/ads/CalendarAdHook', 'feature/ads/WeatherAdHook', 'feature/update/MiFitnessUpdateHook',
                          'feature/bluetooth/BluetoothReconnectHook', 'feature/bluetooth/BluetoothSettingsHook', 'feature/bluetooth/BluetoothConfig',
                          'feature/power/PowerSaveSettingsHook', 'feature/power/AutoPowerSaveHook', 'feature/power/PowerSaveConfig', 'feature/power/PowerSaveRule',
+                         'feature/privacy/PrivacyTelemetryHook', 'feature/stk/StkWelcomeHook', 'ui/FeatureSearchMode',
                          'feature/xiaoai/XiaoAiHook', 'feature/xiaoai/XiaoAiConfig', 'feature/xiaoai/XiaoAiStore',
                          'feature/xiaoai/XiaoAiDialogs', 'feature/xiaoai/ChatCompletions', 'feature/xiaoai/XiaoAiPersona',
                          'feature/xiaoai/XiaoAiNativePersona', 'feature/xiaoai/XiaoAiMiuix', 'feature/xiaoai/XiaoAiAvatar',
@@ -44,11 +49,23 @@ def main():
         assert 'Lio/github/hypernova/feature/notification/ChannelKey;' not in declared
         assert 'Lio/github/hypernova/feature/xiaoai/XiaoAiConfig$Agent;' not in declared, 'Retired local-agent feature bundled'
         assert bridge_class not in declared, 'Host bridge must not be loaded by the module class loader'
-        forbidden = ('Lcom/android/systemui/', 'Lcom/android/wm/shell/', 'Lcom/android/calendar/', 'Lcom/miui/', 'LA4/', 'Lde/robv/android/xposed/',
+        forbidden = ('Lcom/android/systemui/', 'Lcom/android/wm/shell/', 'Lcom/android/calendar/', 'Lcom/android/stk/', 'Lcom/miui/', 'LA4/', 'Lde/robv/android/xposed/',
+                     'Lio/github/libxposed/api/',
                      'Lcom/xiaomi/voiceassistant/', 'Lr21/', 'Lorg/json/', 'Lorg/junit/', 'Lio/github/connectcolours/')
         assert not any(item.startswith(forbidden) for item in declared), 'Host/test/API classes bundled'
         assert archive.read('assets/xposed_init').decode().strip() == 'io.github.hypernova.hook.ModuleEntry'
-    print('APK entry, notification bridge, generated asset and dependency exclusions OK')
+        modern = 'META-INF/xposed/'
+        if args.legacy_migration:
+            assert not any(name.startswith(modern) for name in archive.namelist()), 'Migration APK must load as legacy'
+        else:
+            assert archive.read(modern + 'java_init.list').decode().strip() == 'io.github.hypernova.hook.ModernModuleEntry'
+            properties = archive.read(modern + 'module.prop').decode().splitlines()
+            assert set(properties) == {'minApiVersion=101', 'targetApiVersion=101', 'staticScope=false'}
+            assert 'Lio/github/libxposed/service/XposedProvider;' in declared, 'Missing service provider'
+            scopes = set(archive.read(modern + 'scope.list').decode().splitlines())
+            values = ET.parse(root / 'app/src/main/res/values/strings.xml')
+            assert scopes == {item.text for item in values.findall('.//string-array[@name="xposed_scope"]/item')}
+    print('APK entries, scope metadata, notification bridge and dependency exclusions OK')
 
 
 if __name__ == '__main__':

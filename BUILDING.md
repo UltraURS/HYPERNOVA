@@ -1,6 +1,6 @@
 # 构建 HYPERNOVA
 
-工具基线：JDK 21、Gradle 8.9、AGP 8.7.3、Android SDK / Build Tools 35；Java 源码目标 17。Gradle Wrapper 已固定版本与分发包 SHA-256。
+工具基线为 JDK 21、Gradle 8.9、AGP 8.7.3、Android SDK 36 与 Build Tools 35.0.0。APK 的最低版本和目标版本均为 Android 15，Java 源码目标为 17。Gradle Wrapper 已固定版本与分发包 SHA-256。
 
 Windows PowerShell：
 
@@ -24,11 +24,13 @@ gradlew.bat :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
 python tools/verify-targets.py --apks ./apks
 ```
 
-该工具核对 SystemUI、插件、Settings、framework、系统桌面、手机管家、日历、天气、小米运动健康和超级小爱的文件哈希与 353 个 DEX 成员。样本清单在 `docs/adaptation/`。厂商 APK/JAR 由设备提供。
+该工具核对已适配组件的文件哈希与 361 个 DEX 成员。SystemHelper、RegService 和 Analytics 样本位于 `apks/隐私组件/`。样本清单在 `docs/adaptation/`。厂商 APK/JAR 由设备提供。
 
 超级小爱原生人格回归使用 `python tools/verify-xiaoai-persona.py --jdk <JDK目录> --json <org.json测试依赖JAR>`。该脚本编译实际 Hook，在 JVM 中检查手势浮窗的文字请求、转写后提交的语音、原生大模型事件、提示词回显处理和离线请求隔离。
 
 构建输出为 `app/build/outputs/apk/debug/app-debug.apk`。测试报告在 `app/build/reports/tests/testDebugUnitTest/`，Lint 报告在 `app/build/reports/lint-results-debug.html`。开发版使用本机调试签名，密钥位于 `.local/android-user/`，不提交；后续在同机升级需保留该密钥。
+
+使用 `./build.ps1 -LegacyConfigMigration` 可构建旧配置过渡包。该包保留传统加载元数据，通过现有共享偏好读取旧版配置并备份到应用私有存储。先保留正式开发版输出，再构建过渡包，两次构建共用 APK 输出路径。
 
 主要源码入口：
 

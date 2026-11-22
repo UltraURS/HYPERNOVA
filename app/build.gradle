@@ -1,16 +1,20 @@
 plugins { id 'com.android.application' }
+def legacyConfigMigration = providers.gradleProperty('legacyConfigMigration').isPresent()
 android {
     namespace 'io.github.hypernova'
-    compileSdk 35
+    compileSdk 36
     buildToolsVersion '35.0.0'
     defaultConfig {
         applicationId 'io.github.hypernova'
         minSdk 35
         targetSdk 35
-        versionCode 30
-        versionName '0.2.27-dev'
+        versionCode legacyConfigMigration ? 33 : 35
+        versionName legacyConfigMigration ? '0.2.31-migration' : '0.2.31-dev'
         resValue 'string', 'module_version', versionName
+        buildConfigField 'boolean', 'LEGACY_CONFIG_MIGRATION', legacyConfigMigration.toString()
     }
+    buildFeatures { buildConfig true }
+    if (!legacyConfigMigration) sourceSets.main.resources.srcDir('src/modern/resources')
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -54,7 +58,7 @@ def dexBridge = tasks.register('dexHostBridge', DexHostBridgeTask) {
         // Android Components may assign a variant-specific generated directory.
         def generatedAssets = assetsDirectory.get().asFile
         generatedAssets.mkdirs()
-        args = ['--min-api', '34', '--lib', new File(android.sdkDirectory, 'platforms/android-35/android.jar'),
+        args = ['--min-api', '34', '--lib', new File(android.sdkDirectory, "platforms/android-${android.compileSdk}/android.jar"),
                 '--classpath', stubJar.get().archiveFile.get().asFile,
                 '--output', generatedAssets, bridgeJar.get().archiveFile.get().asFile]
     }
@@ -64,6 +68,13 @@ androidComponents.onVariants(androidComponents.selector().all()) { variant ->
 }
 dependencies {
     compileOnly 'de.robv.android.xposed:api:82'
+    compileOnly('io.github.libxposed:api:101.0.1') {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
+    }
+    implementation('io.github.libxposed:service:101.0.0') {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
+    }
+    testRuntimeOnly 'de.robv.android.xposed:api:82'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.json:json:20240303'
 }

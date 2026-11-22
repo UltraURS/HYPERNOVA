@@ -31,6 +31,22 @@ public final class DeviceProfile {
             return verifyApk(context, packageName, 348003L,
                 "5bee70a93ddb380b779f1c58d8d2c6313242886556c5ee077eb60a1557accac1");
         }
+        if ("com.android.stk".equals(packageName)) {
+            return verifyApk(context, packageName, 35L,
+                "4eaf4bbc10ef1c05e98f0950344144add18952a9dc525f9bc7733c06b5f65cd8");
+        }
+        if ("com.mobiletools.systemhelper".equals(packageName)) {
+            return verifyApk(context, packageName, 31L,
+                "5267008ede808c467988df588915791d21a6f1f3fbe219c57b125a235000df4f");
+        }
+        if ("com.miui.dmregservice".equals(packageName)) {
+            return verifyApk(context, packageName, 34L,
+                "5c847426082037163b8e414da4e3e7b51388414b3e3c413de83c1583304db82d");
+        }
+        if ("com.miui.analytics".equals(packageName)) {
+            return verifyApk(context, packageName, 2026091500L,
+                "a3656199f013e2f68bc20022f941122a13ce99e33c5df1cef054c9267189d73f");
+        }
         if ("com.miui.voiceassist".equals(packageName)) {
             return verifyApk(context, packageName, 507009011L,
                 "dd75a0d9b1c0803906eafe72126dc44a150f16337e26c8fcf53304f13d74140b");

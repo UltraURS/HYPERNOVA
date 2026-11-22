@@ -4,6 +4,69 @@
   "status": "STATIC_ONLY",
   "inputs": [
     {
+      "file": "apks/USIM卡应用_15.apk",
+      "bytes": 6487215,
+      "sha256": "4eaf4bbc10ef1c05e98f0950344144add18952a9dc525f9bc7733c06b5f65cd8",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 4515168
+        }
+      ],
+      "native_abis": [],
+      "has_manifest": true,
+      "package": "com.android.stk",
+      "version_name": "15",
+      "version_code": 35,
+      "id": "stk"
+    },
+    {
+      "file": "apks/隐私组件/SystemHelper_3.0.1-20250311.apk",
+      "bytes": 3261815,
+      "sha256": "5267008ede808c467988df588915791d21a6f1f3fbe219c57b125a235000df4f",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 1513428
+        }
+      ],
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "has_manifest": true,
+      "id": "systemhelper"
+    },
+    {
+      "file": "apks/隐私组件/RegService_15.0.4.apk",
+      "bytes": 2627288,
+      "sha256": "5c847426082037163b8e414da4e3e7b51388414b3e3c413de83c1583304db82d",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 1412496
+        }
+      ],
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "has_manifest": true,
+      "id": "regservice"
+    },
+    {
+      "file": "apks/隐私组件/Analytics_6.33.0.apk",
+      "bytes": 525597,
+      "sha256": "a3656199f013e2f68bc20022f941122a13ce99e33c5df1cef054c9267189d73f",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 1025604
+        }
+      ],
+      "native_abis": [],
+      "has_manifest": true,
+      "id": "analytics"
+    },
+    {
       "file": "apks/小米运动健康.apk",
       "bytes": 131349131,
       "sha256": "5bee70a93ddb380b779f1c58d8d2c6313242886556c5ee077eb60a1557accac1",
@@ -432,6 +495,54 @@
     }
   ],
   "target_declarations": [
+    {
+      "input_id": "stk",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/stk/MiStkStubImpl;->filterDisplayText(Ljava/lang/String;)Z"
+    },
+    {
+      "input_id": "stk",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/android/stk/MiStkStubImpl;->launchTextDialog(Landroid/content/Intent;ILcom/android/internal/telephony/cat/TextMessage;)Z"
+    },
+    {
+      "input_id": "systemhelper",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/mobiletools/systemhelper/control/AppInfoRegisterReceiver;->onReceive(Landroid/content/Context;Landroid/content/Intent;)V"
+    },
+    {
+      "input_id": "systemhelper",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/mobiletools/systemhelper/control/GetSignalInfoReceiver;->onReceive(Landroid/content/Context;Landroid/content/Intent;)V"
+    },
+    {
+      "input_id": "systemhelper",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/mobiletools/systemhelper/control/SignalInfoRegisterReceiver;->onReceive(Landroid/content/Context;Landroid/content/Intent;)V"
+    },
+    {
+      "input_id": "systemhelper",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lcom/mobiletools/systemhelper/control/e;->a(Lorg/json/JSONObject;)Z"
+    },
+    {
+      "input_id": "regservice",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "Lu0/i;->g()Z"
+    },
+    {
+      "input_id": "analytics",
+      "dex": "classes.dex",
+      "kind": "method",
+      "member": "La/b/a/e/g;->h(Z)V"
+    },
     {
       "input_id": "health",
       "dex": "classes6.dex",
