@@ -1,5 +1,6 @@
 package io.github.hypernova.feature.notification;
 
+import android.content.res.Configuration;
 import android.graphics.Insets;
 import android.view.Gravity;
 import android.view.View;
@@ -82,6 +83,8 @@ public final class NotificationClearAllHook {
     }
 
     private static void position(View button) {
+        // HyperOS positions the native button at the right center in landscape.
+        if (button.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) return;
         if (!(button.getLayoutParams() instanceof FrameLayout.LayoutParams params) || !(button.getParent() instanceof View parent)) return;
         WindowInsets window = button.getRootWindowInsets();
         Insets safe = window == null ? Insets.NONE : window.getInsets(WindowInsets.Type.navigationBars() | WindowInsets.Type.displayCutout());

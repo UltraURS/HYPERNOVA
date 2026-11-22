@@ -8,6 +8,7 @@
         <item>com.miui.securitycenter</item>
         <item>com.android.calendar</item>
         <item>com.miui.weather2</item>
+        <item>com.mi.health</item>
         <item>com.miui.voiceassist</item>
         <item>com.miui.screenshot</item>
     </string-array>

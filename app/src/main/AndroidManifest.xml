@@ -7,6 +7,7 @@
         <package android:name="com.miui.securitycenter" />
         <package android:name="com.android.calendar" />
         <package android:name="com.miui.weather2" />
+        <package android:name="com.mi.health" />
         <package android:name="com.miui.voiceassist" />
         <package android:name="com.miui.screenshot" />
     </queries>

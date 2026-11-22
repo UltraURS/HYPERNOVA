@@ -15,6 +15,7 @@ import io.github.hypernova.config.Feature;
 import io.github.hypernova.compat.DeviceProfile;
 import io.github.hypernova.feature.traffic.TrafficTileHook;
 import io.github.hypernova.feature.update.SettingsEntryHook;
+import io.github.hypernova.feature.update.MiFitnessUpdateHook;
 import io.github.hypernova.feature.notification.NotificationControlsHook;
 import io.github.hypernova.feature.notification.NotificationClearAllHook;
 import io.github.hypernova.feature.sidebar.SidebarGesture;
@@ -46,12 +47,13 @@ public final class ModuleEntry implements IXposedHookLoadPackage {
         boolean panel = "com.miui.securitycenter".equals(load.packageName) && "com.miui.securitycenter:ui".equals(load.processName);
         boolean calendar = "com.android.calendar".equals(load.packageName) && load.packageName.equals(load.processName);
         boolean weather = "com.miui.weather2".equals(load.packageName) && load.packageName.equals(load.processName);
+        boolean health = "com.mi.health".equals(load.packageName) && load.packageName.equals(load.processName);
         boolean xiaoai = XiaoAiHook.PACKAGE.equals(load.packageName) && load.packageName.equals(load.processName);
         boolean screenshot = ScreenshotAppHook.PACKAGE.equals(load.packageName)
             && (load.packageName.equals(load.processName) || (load.packageName + ":photo_editor").equals(load.processName));
         boolean powerSettings = "com.miui.securitycenter".equals(load.packageName) && load.packageName.equals(load.processName);
         boolean powerWorker = "com.miui.securitycenter".equals(load.packageName) && "com.miui.securitycenter.remote".equals(load.processName);
-        if (!(systemui || settings || home || panel || calendar || weather || xiaoai || screenshot || powerSettings || powerWorker)) return;
+        if (!(systemui || settings || home || panel || calendar || weather || health || xiaoai || screenshot || powerSettings || powerWorker)) return;
         HookLog.info("LOAD " + load.processName);
         if (!DeviceProfile.matchesBuild()) { HookLog.info("UNSUPPORTED build"); return; }
         XposedHelpers.findAndHookMethod(Application.class, "attach", Context.class, new XC_MethodHook() {
@@ -85,6 +87,7 @@ public final class ModuleEntry implements IXposedHookLoadPackage {
                         int holdMillis = prefs.getInt(SidebarGesture.HOLD_KEY, SidebarGesture.DEFAULT_HOLD_MILLIS);
                         if (powerSettings || powerWorker ? !autoPower : systemui ? !(traffic || notifications || clearAll || freeformClose || bluetooth || screenshotMenu) : settings ? !(ota || reset || bluetooth)
                             : home ? !sidebar : calendar ? !calendarAds : weather ? !weatherAds
+                            : health ? !prefs.getBoolean(Feature.HEALTH_FORCE_UPDATE.key, false)
                             : xiaoai ? !prefs.getBoolean(Feature.XIAOAI_CUSTOM.key, false) : screenshot ? !screenshotMenu : !(sidebar || hideTrigger || swipeClose)) {
                             HookLog.info(load.processName + " DISABLED"); return;
                         }
@@ -119,6 +122,7 @@ public final class ModuleEntry implements IXposedHookLoadPackage {
                             () -> SidebarGestureHook.install(load.classLoader, holdMillis));
                         else if (calendar) CalendarAdHook.install(load.classLoader);
                         else if (weather) WeatherAdHook.install(load.classLoader);
+                        else if (health) MiFitnessUpdateHook.install(load.classLoader);
                         else if (xiaoai) new Handler(Looper.getMainLooper()).post(
                             () -> XiaoAiHook.install(context, load.classLoader));
                         else if (screenshot) ScreenshotAppHook.install(load.classLoader, load.packageName.equals(load.processName));
@@ -132,8 +136,8 @@ public final class ModuleEntry implements IXposedHookLoadPackage {
                         });
                     } catch (Throwable error) { HookLog.error(load.packageName, error); }
                 };
-                // A cold screenshot service can receive the first request as soon as attach returns.
-                if (screenshot) setup.run();
+                // Install before the first screenshot request or startup update prompt.
+                if (screenshot || health) setup.run();
                 else new Thread(setup, "HYPERNOVA-setup").start();
             }
         });

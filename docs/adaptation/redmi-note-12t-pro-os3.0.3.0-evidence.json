@@ -4,6 +4,66 @@
   "status": "STATIC_ONLY",
   "inputs": [
     {
+      "file": "apks/小米运动健康.apk",
+      "bytes": 131349131,
+      "sha256": "5bee70a93ddb380b779f1c58d8d2c6313242886556c5ee077eb60a1557accac1",
+      "dex": [
+        {
+          "name": "classes.dex",
+          "bytes": 9437660
+        },
+        {
+          "name": "classes10.dex",
+          "bytes": 10189644
+        },
+        {
+          "name": "classes11.dex",
+          "bytes": 9835856
+        },
+        {
+          "name": "classes12.dex",
+          "bytes": 6494760
+        },
+        {
+          "name": "classes2.dex",
+          "bytes": 7639172
+        },
+        {
+          "name": "classes3.dex",
+          "bytes": 9282612
+        },
+        {
+          "name": "classes4.dex",
+          "bytes": 3280488
+        },
+        {
+          "name": "classes5.dex",
+          "bytes": 8727492
+        },
+        {
+          "name": "classes6.dex",
+          "bytes": 8129932
+        },
+        {
+          "name": "classes7.dex",
+          "bytes": 8185172
+        },
+        {
+          "name": "classes8.dex",
+          "bytes": 8827956
+        },
+        {
+          "name": "classes9.dex",
+          "bytes": 10473256
+        }
+      ],
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "has_manifest": true,
+      "id": "health"
+    },
+    {
       "file": "apks/超级小爱.apk",
       "bytes": 161303814,
       "sha256": "dd75a0d9b1c0803906eafe72126dc44a150f16337e26c8fcf53304f13d74140b",
@@ -372,6 +432,18 @@
     }
   ],
   "target_declarations": [
+    {
+      "input_id": "health",
+      "dex": "classes6.dex",
+      "kind": "method",
+      "member": "Lcom/mi/health/appupgrade/AppUpgradeUtil;->showUpdateDialogIfNeed(Landroidx/fragment/app/FragmentManager;Lcom/mi/health/appupgrade/model/AppUpgradeResult;Z)V"
+    },
+    {
+      "input_id": "health",
+      "dex": "classes6.dex",
+      "kind": "method",
+      "member": "Lcom/mi/health/appupgrade/model/AppUpgradeResult;->getNew_version()I"
+    },
     {
       "input_id": "xiaoai",
       "dex": "classes7.dex",

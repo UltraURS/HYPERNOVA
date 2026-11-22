@@ -8,6 +8,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -48,11 +50,13 @@ import java.util.Locale;
 /** Native views with Miuix-style surfaces and package-based preference pages. */
 public final class MainActivity extends Activity {
     private static final String PACKAGE_PAGE = "package_page";
+    private static final String REPOSITORY_URL = "https://github.com/UltraURS/HYPERNOVA";
     private static final String[][] PACKAGES = {
         {"设置", "com.android.settings"}, {"系统界面", "com.android.systemui"},
         {"系统更新", "com.android.updater"}, {"系统桌面", "com.miui.home"},
         {"手机管家", "com.miui.securitycenter"}, {"日历", "com.android.calendar"},
-        {"天气", "com.miui.weather2"}, {"超级小爱", "com.miui.voiceassist"}, {"截屏", "com.miui.screenshot"}
+        {"天气", "com.miui.weather2"}, {"超级小爱", "com.miui.voiceassist"}, {"截屏", "com.miui.screenshot"},
+        {"小米运动健康", "com.mi.health"}
     };
     private SharedPreferences preferences;
     private LinearLayout body, navigation;
@@ -299,7 +303,7 @@ public final class MainActivity extends Activity {
         infoRow(scope, "小窗右上角关闭按钮", "在系统界面分类开启。点击 × 沿用系统原生小窗关闭，任务转到后台。");
         infoRow(scope, "蓝牙自动重连", "在设置或系统界面分类开启，重启后到系统蓝牙的已配对设备详情底部设置 HYPERNOVA 选项。每台默认关闭，1～5 次含首次；请求后等待连接 15 秒，连接出现后再稳定确认 5 秒才提示成功。短暂连接不重置次数，失败或稳定连接后断开均等待 10 秒；系统正在连接时延后尝试。手动断开后暂停，重新开蓝牙或重启恢复。蓝牙重连提示可在系统界面分类单独开启。");
         infoRow(scope, "自动省电", "系统省电模式页可设置未接电且电量严格小于阈值时自动开启普通省电模式。默认关闭，阈值 20%～80%、默认 20%；开关和阈值保存后立即生效。本轮手动关闭后保持关闭，重新插拔电源或电量恢复到阈值再下降时重新触发。充电或关闭自动选项不会替你关闭已开启的省电模式。");
-        infoRow(scope, "通知中心一键清理", "开启后在通知中心底部显示系统清理按钮，保留锁定和系统不可清除的通知；仅置顶的通知仍可清理。");
+        infoRow(scope, "通知中心一键清理", "竖屏时按钮位于通知中心底部，横屏时位于右侧中部。保留锁定和系统不可清除的通知，仅置顶的通知仍可清理。");
         infoRow(scope, "日历与天气广告", "在各自分类分别开启。阻断专用广告加载，屏蔽缓存广告；共用内容接口保留正常内容并过滤广告条目。");
         infoRow(scope, "恢复出厂设置", "隐藏普通条目、底部推荐及设置搜索结果，不拦截实际重置。");
         infoRow(scope, "OTA 服务器阻断", "仅限已适配的 OTA 客户端。当前 ROM 没有更新器时，在系统更新分类显示不适用。");
@@ -307,7 +311,23 @@ public final class MainActivity extends Activity {
         section(content, "来源");
         LinearLayout source = paddedCard();
         infoRow(source, "许可证", "GPL-3.0-only");
+        LinearLayout repository = column();
+        infoRow(repository, "GitHub 仓库", REPOSITORY_URL).setTextColor(accent);
+        repository.setBackground(ripple(surface));
+        repository.setFocusable(true);
+        repository.setOnClickListener(view -> openRepository());
+        source.addView(repository);
         content.addView(source);
+    }
+    private void openRepository() {
+        Intent link = new Intent(Intent.ACTION_VIEW, Uri.parse(REPOSITORY_URL)).addCategory(Intent.CATEGORY_BROWSABLE);
+        // Resolve a generic web address so a GitHub App Link cannot take over.
+        link.setSelector(new Intent(Intent.ACTION_VIEW, Uri.parse("https://example.invalid/")).addCategory(Intent.CATEGORY_BROWSABLE));
+        try {
+            startActivity(link);
+        } catch (ActivityNotFoundException error) {
+            Toast.makeText(this, "未找到可打开链接的浏览器", Toast.LENGTH_SHORT).show();
+        }
     }
     private LinearLayout packageIdentity(String[] target, boolean arrow) {
         LinearLayout row = new LinearLayout(this); row.setGravity(Gravity.CENTER_VERTICAL);
@@ -393,9 +413,10 @@ public final class MainActivity extends Activity {
     private ImageView icon(int resource, int color) {
         ImageView image = new ImageView(this); Drawable drawable = getDrawable(resource).mutate(); drawable.setTint(color); image.setImageDrawable(drawable); return image;
     }
-    private void infoRow(LinearLayout parent, String label, String value) {
+    private TextView infoRow(LinearLayout parent, String label, String value) {
         TextView heading = text(label, 13, muted, false); heading.setPadding(0, dp(8), 0, dp(5)); parent.addView(heading);
         TextView detail = text(value, 15, ink, false); detail.setPadding(0, 0, 0, dp(12)); parent.addView(detail);
+        return detail;
     }
     private void section(LinearLayout parent, String label) {
         TextView heading = text(label, 13, muted, false); heading.setPadding(dp(12), dp(22), 0, dp(10)); parent.addView(heading);

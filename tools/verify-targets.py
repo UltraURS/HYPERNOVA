@@ -272,6 +272,10 @@ TARGETS = {
         "Lcom/miui/calendar/ad/AdsExtraManager;->b:Lretrofit2/Call;",
         "Lretrofit2/Call;->cancel()V"
     ],
+    "health": [
+        "Lcom/mi/health/appupgrade/AppUpgradeUtil;->showUpdateDialogIfNeed(Landroidx/fragment/app/FragmentManager;Lcom/mi/health/appupgrade/model/AppUpgradeResult;Z)V",
+        "Lcom/mi/health/appupgrade/model/AppUpgradeResult;->getNew_version()I",
+    ],
     "weather": [
         "Lq1/e;->j(Ljava/lang/String;I)V",
         "Lw1/d;->a(Ljava/util/Map;Lretrofit2/Callback;)V",

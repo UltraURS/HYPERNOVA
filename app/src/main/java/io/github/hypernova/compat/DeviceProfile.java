@@ -27,6 +27,10 @@ public final class DeviceProfile {
             return verifyApk(context, packageName, 17000315L,
                 "a8af7c8494c4c9ad882ad96adb96c2779ac60b7bbbb7f0d176e566d4c7469ec1");
         }
+        if ("com.mi.health".equals(packageName)) {
+            return verifyApk(context, packageName, 348003L,
+                "5bee70a93ddb380b779f1c58d8d2c6313242886556c5ee077eb60a1557accac1");
+        }
         if ("com.miui.voiceassist".equals(packageName)) {
             return verifyApk(context, packageName, 507009011L,
                 "dd75a0d9b1c0803906eafe72126dc44a150f16337e26c8fcf53304f13d74140b");

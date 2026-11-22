@@ -31,7 +31,7 @@ def main():
         for required in ('hook/ModuleEntry', 'feature/notification/NotificationControlsHook', 'feature/notification/NotificationClearAllHook', 'feature/update/SettingsSearchHook',
                          'feature/sidebar/SidebarGesture', 'feature/sidebar/SidebarGestureHook', 'feature/sidebar/SidebarPanelHook',
                          'feature/sidebar/SidebarTriggerHook', 'feature/sidebar/SidebarSwipeHook', 'feature/freeform/FreeformCloseHook',
-                         'feature/ads/CalendarAdHook', 'feature/ads/WeatherAdHook',
+                         'feature/ads/CalendarAdHook', 'feature/ads/WeatherAdHook', 'feature/update/MiFitnessUpdateHook',
                          'feature/bluetooth/BluetoothReconnectHook', 'feature/bluetooth/BluetoothSettingsHook', 'feature/bluetooth/BluetoothConfig',
                          'feature/power/PowerSaveSettingsHook', 'feature/power/AutoPowerSaveHook', 'feature/power/PowerSaveConfig', 'feature/power/PowerSaveRule',
                          'feature/xiaoai/XiaoAiHook', 'feature/xiaoai/XiaoAiConfig', 'feature/xiaoai/XiaoAiStore',
